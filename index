@@ -3,6 +3,1429 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Writing Journey · Level 2 (canonical)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style type="text/css">
+  .level-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .level-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+  .locked { opacity: 0.5; pointer-events: none; filter: grayscale(1); }
+  h2, h3 { color: #4f46e5; }
+  .progress-bar { transition: width 0.6s ease; }
+  .section-banner { background: #111; color: #fff; padding: 12px 20px; border-radius: 12px; font-weight: 700; font-size: 1.05rem; }
+  .green-box { background: linear-gradient(180deg,#ffffff,#ffffff); border: 2px solid; border-image: linear-gradient(135deg,#10b981,#06b6d4) 1; border-radius: 16px; padding: 16px; }
+
+  /* ===== Abstract Heist modal overlay ===== */
+  .heist-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; display: none; padding: 2vh 2vw; }
+  .heist-modal.open { display: block; }
+  .heist-modal iframe { width: 100%; height: 100%; border: 0; border-radius: 10px; background: #0c0a09; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+  .heist-close { position: fixed; top: 18px; right: 18px; background: #fff; color: #000; border: 0; width: 46px; height: 46px; border-radius: 50%; font-size: 22px; font-weight: 700; cursor: pointer; z-index: 10000; box-shadow: 0 4px 14px rgba(0,0,0,0.5); transition: transform 0.15s; }
+  .heist-close:hover { transform: scale(1.08); }
+  body.heist-open { overflow: hidden; }
+
+  /* ===== Secret Vault · Bonus World card (warp zone between L3 and L4) ===== */
+  .bonus-vault { position: relative; background: linear-gradient(135deg, #0c0a09, #1c1712); border: 1px solid #3a2f23; border-radius: 1.5rem; padding: 1.75rem; color: #ece2d2; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .bonus-vault::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 100% at 50% 0%, rgba(244,183,64,0.20), transparent 60%); pointer-events: none; }
+  .bonus-vault::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .bonus-vault.unlocked { border-color: #f4b740; box-shadow: 0 0 30px rgba(244,183,64,0.18); animation: vault-glow 2.4s ease-in-out infinite; }
+  .bonus-vault.unlocked:hover { transform: translateY(-6px); box-shadow: 0 25px 50px rgba(0,0,0,0.55), 0 0 60px rgba(244,183,64,0.35); }
+  .bonus-vault.locked { opacity: 0.45; filter: grayscale(0.6); }
+  .bonus-vault.completed { border-color: #34d3a6; box-shadow: 0 0 26px rgba(52,211,166,0.18); animation: none; }
+  @keyframes vault-glow { 0%, 100% { box-shadow: 0 0 24px rgba(244,183,64,0.18); } 50% { box-shadow: 0 0 48px rgba(244,183,64,0.42); } }
+  .bonus-inner { display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 1; }
+  .bonus-emoji { font-size: 3.75rem; flex-shrink: 0; filter: drop-shadow(0 4px 14px rgba(244,183,64,0.4)); }
+  .bonus-content { flex: 1; min-width: 0; }
+  .bonus-label { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.25em; font-size: 0.72rem; color: #caa14e; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .bonus-vault.completed .bonus-label { color: #34d3a6; }
+  .bonus-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.55rem; color: #ece2d2; }
+  .bonus-desc { font-size: 0.875rem; color: #b8ab98; line-height: 1.55; max-width: 42rem; }
+  .bonus-desc code { background: rgba(244,183,64,0.12); color: #f4b740; padding: 1px 7px; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 0.82rem; letter-spacing: 0.08em; }
+  .bonus-desc b { color: #f4b740; font-weight: 600; }
+  .bonus-action { flex-shrink: 0; }
+  .bonus-btn { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.12em; background: #f4b740; color: #0c0a09; border: 0; padding: 0.85rem 1.6rem; border-radius: 0.5rem; font-size: 1.15rem; cursor: pointer; text-transform: uppercase; white-space: nowrap; transition: all 0.2s; box-shadow: 0 6px 16px rgba(244,183,64,0.25); }
+  .bonus-btn:hover { box-shadow: 0 8px 28px rgba(244,183,64,0.55); transform: translateY(-2px); }
+  .bonus-btn.done { background: transparent; color: #34d3a6; border: 1px solid #34d3a6; box-shadow: 0 0 16px rgba(52,211,166,0.20); }
+  .bonus-btn.done:hover { box-shadow: 0 0 28px rgba(52,211,166,0.4); }
+  .bonus-status { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.18em; color: #9c8f7b; font-size: 0.88rem; text-transform: uppercase; }
+  @media (max-width: 768px) { .bonus-inner { flex-direction: column; text-align: center; } .bonus-desc { margin: 0 auto; } }
+</style>
+</head>
+<body>
+<div class="max-w-7xl mx-auto p-8">
+
+  <!-- HEADER -->
+  <div class="mb-12 text-center">
+    <h1 class="font-bold text-5xl text-indigo-700">📘 Academic Writing Journey</h1>
+    <p class="mt-3 text-2xl text-gray-700">B2 → C1 • 6 Hours • 2,500 XP</p>
+    <p class="font-medium text-indigo-600">Gamified Unit using SAM + Casañ-Pitarch IPO Model • Created with Claude + Canva LMS</p>
+  </div>
+
+  <!-- Overview toggle -->
+  <div class="mb-8 text-center">
+    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-3xl font-semibold flex items-center gap-3 mx-auto" onclick="toggleOverview()">Show Full Academic Overview</button>
+  </div>
+
+  <!-- Rich Overview -->
+  <div class="bg-white hidden mb-12 p-10 rounded-3xl shadow-xl" id="overview-section">
+    <h2 class="font-bold mb-8 text-3xl">Academic Writing Journey: Mastering the Scholarly Abstract</h2>
+    <p class="mb-6 text-gray-700">A fully asynchronous, self-paced Canva Course designed to move learners from B2 to C1 in academic English, with a minor focus on academic literacy conventions.</p>
+    <div class="gap-10 grid md:grid-cols-2">
+      <div>
+        <h3 class="font-semibold mb-4 text-indigo-600">Course Identity</h3>
+        <p class="text-sm">The unit is structured as a six-hour core Canva Course with 18 sequenced activities (3 per level) across six progressive levels. Learners become researchers progressing from novice explorer to Q1-publishing scholar.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-4 text-indigo-600">Instructional Framework</h3>
+        <p class="text-sm">SAM + Pitarch IPO + ESA + CLIL (4Cs). Progress tracking via Reporting tab • Solo Work submissions • Padlet (Level 5) • Flip/Vocaroo (Level 6).</p>
+      </div>
+    </div>
+    <h3 class="font-semibold mb-4 mt-10 text-indigo-600">Gamified Progression: Six Levels to Q1 Scholarship</h3>
+    <table class="border-collapse text-sm w-full">
+      <tbody>
+        <tr class="bg-gray-100"><th class="p-3 text-left">Level</th><th class="p-3">Title</th><th class="p-3">XP</th><th class="p-3">Badge</th><th class="p-3">Pitarch Focus</th></tr>
+        <tr><td class="border p-3">1</td><td class="border p-3">Curious Student</td><td class="border p-3">100</td><td class="border p-3">Bronze Compass</td><td class="border p-3">Input — AWL &amp; Register</td></tr>
+        <tr><td class="border p-3">2</td><td class="border p-3">Apprentice Researcher</td><td class="border p-3">200</td><td class="border p-3">Silver Notebook</td><td class="border p-3">Input + Processing — Reading</td></tr>
+        <tr><td class="border p-3">3</td><td class="border p-3">Junior Scholar</td><td class="border p-3">300</td><td class="border p-3">Golden Microscope</td><td class="border p-3">Processing — Grammar</td></tr>
+        <tr><td class="border p-3">4</td><td class="border p-3">Developing Author</td><td class="border p-3">400</td><td class="border p-3">Platinum Journal</td><td class="border p-3">Processing + Output — Listening</td></tr>
+        <tr><td class="border p-3">5</td><td class="border p-3">Emerging Researcher</td><td class="border p-3">500</td><td class="border p-3">Sapphire Globe</td><td class="border p-3">Output — Writing</td></tr>
+        <tr><td class="border p-3">6</td><td class="border p-3">Academic Challenger (Boss)</td><td class="border p-3">1,000</td><td class="border p-3">Diamond Crown</td><td class="border p-3">Output — Speaking</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Progress + Leaderboard -->
+  <div class="gap-8 grid mb-12 md:grid-cols-2">
+    <div class="bg-white p-8 rounded-3xl shadow">
+      <h3 class="flex font-semibold gap-2 items-center mb-4">Your Journey Progress</h3>
+      <div class="flex justify-between mb-3 text-sm"><span id="progress-text">Level 1 of 6 • 100 XP</span><span class="font-bold text-indigo-600">2,500 XP Total</span></div>
+      <div class="bg-gray-200 h-4 overflow-hidden rounded-full">
+        <div class="bg-gradient-to-r from-indigo-500 h-4 progress-bar to-purple-600 w-1/6" id="progress-bar">&nbsp;</div>
+      </div>
+    </div>
+    <div class="bg-white p-8 rounded-3xl shadow">
+      <h3 class="flex font-semibold gap-2 items-center mb-4">Pole Position • Class Leaderboard</h3>
+      <div class="space-y-4">
+        <div class="bg-amber-100 flex gap-4 items-center p-4 rounded-2xl"><div class="text-3xl">🥇</div><div class="flex-1"><strong>Ana López</strong> <span class="text-amber-700 text-xs">— 2,300 XP • Level 6</span></div><div class="font-bold text-amber-700">1st</div></div>
+        <div class="bg-slate-100 flex gap-4 items-center p-4 rounded-2xl"><div class="text-3xl">🥈</div><div class="flex-1"><strong>Carlos Rivera</strong> <span class="text-slate-700 text-xs">— 1,800 XP • Level 5</span></div><div class="font-bold text-slate-700">2nd</div></div>
+        <div class="bg-gray-100 flex gap-4 items-center p-4 rounded-2xl"><div class="text-3xl">🥉</div><div class="flex-1"><strong>Maria Santos</strong> <span class="text-gray-600 text-xs">— 650 XP • Level 3</span></div><div class="font-bold text-gray-600">Last (3rd)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 LEVELS -->
+  <h2 class="font-bold mb-10 text-3xl text-center">🛤️ The 6 Levels of the Journey</h2>
+  <div class="gap-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2" id="levels-container">&nbsp;</div>
+
+  <!-- Detail Panel -->
+  <div class="bg-white hidden mt-12 p-8 rounded-3xl shadow-2xl" id="detail-panel">&nbsp;</div>
+</div>
+
+<script>
+  let completedLevels = 1;
+
+  const levels = [
+    {id:1, emoji:"🥇", name:"Curious Student",       mission:"Word Hunter",            xp:100,  badge:"Bronze Compass",                color:"amber"},
+    {id:2, emoji:"🥈", name:"Apprentice Researcher", mission:"Speed-Reader's Gauntlet", xp:200,  badge:"Silver Notebook",               color:"slate"},
+    {id:3, emoji:"🥉", name:"Junior Scholar",        mission:"Grammar Forge",          xp:300,  badge:"Golden Microscope",             color:"yellow"},
+    {id:4, emoji:"🏅", name:"Developing Author",     mission:"TED Quest",              xp:400,  badge:"Platinum Journal",              color:"purple"},
+    {id:5, emoji:"💎", name:"Emerging Researcher",   mission:"Paragraph Forge",        xp:500,  badge:"Sapphire Globe",                color:"cyan"},
+    {id:6, emoji:"👑", name:"Academic Challenger",   mission:"Conference Pitch",       xp:1000, badge:"Diamond Crown of Publication",  color:"indigo"}
+  ];
+
+  function renderLevels() {
+    const container = document.getElementById('levels-container');
+    container.innerHTML = '';
+    levels.forEach(l => {
+      const unlocked = l.id <= completedLevels;
+      container.innerHTML += `
+        <div onclick="${unlocked ? `toggleDetail(${l.id})` : ''}" class="level-card bg-white rounded-3xl shadow-xl p-6 cursor-pointer text-center ${unlocked ? '' : 'locked'}">
+          <div class="text-6xl mb-4">${l.emoji}</div>
+          <div class="text-${l.color}-500 text-sm font-bold">LEVEL ${l.id}</div>
+          <h3 class="text-xl font-bold mt-2">${l.name}</h3>
+          <p class="text-emerald-600">${l.mission} • ${l.xp} XP</p>
+          <div class="mt-6 text-xs bg-${l.color}-100 text-${l.color}-700 px-4 py-2 rounded-2xl inline-block">${l.badge}</div>
+          ${!unlocked ? `<div class="mt-6 text-xs bg-gray-200 text-gray-500 py-3 rounded-2xl flex items-center justify-center"><i class="fas fa-lock mr-2"></i>Locked</div>` : ''}
+        </div>`;
+      // Inject the Secret Vault bonus world between Level 3 and Level 4
+      if (l.id === 3) container.innerHTML += bonusVaultHTML();
+    });
+  }
+
+  function bonusVaultHTML() {
+    const unlocked = completedLevels >= 4;   // Level 3 must be completed
+    const done = heistCompleted;
+    const stateClass = done ? 'completed' : (unlocked ? 'unlocked' : 'locked');
+    const label = done ? '✓ Secret Vault Cleared · L4, L5 & L6 Unlocked' : 'Secret Vault · Bonus World';
+    let action;
+    if (!unlocked) {
+      action = `<span class="bonus-status">🔒 Complete Level 3 to unlock</span>`;
+    } else if (done) {
+      action = `<button class="bonus-btn done" onclick="openVaultModal()" type="button">✓ Cracked · Play again</button>`;
+    } else {
+      action = `
+        <button class="bonus-btn" onclick="openVaultModal()" type="button">▶ Enter the Vault</button>
+        <div style="margin-top:8px;font-size:11px;text-align:center;">
+          <a href="#" onclick="manualHeistUnlock();return false;" style="color:#9ca3af;text-decoration:underline;">Played it elsewhere? Unlock manually</a>
+        </div>`;
+    }
+    return `
+      <div class="bonus-vault ${stateClass} lg:col-span-3 md:col-span-2 col-span-1">
+        <div class="bonus-inner">
+          <div class="bonus-emoji">🔐</div>
+          <div class="bonus-content">
+            <div class="bonus-label">${label}</div>
+            <h3 class="bonus-title">The Abstract Heist</h3>
+            <p class="bonus-desc">Crack three vaults — Skim → Scan → Infer — assemble the master code <code>WATER-81-SAFE</code>, and the warp door to <b>Level 6 — the Boss</b> opens. Up to 180 bonus XP and the Abstract Detective badge.</p>
+          </div>
+          <div class="bonus-action">${action}</div>
+        </div>
+      </div>`;
+  }
+
+  /* Heist completion → unlocks Level 6 (the Boss) AND L4 + L5 stay available.
+     Shows a celebration banner so the learner discovers the choice. */
+  let heistCompleted = false;
+  function onHeistComplete(xp, rank) {
+    if (heistCompleted) return;
+    heistCompleted = true;
+    completedLevels = Math.max(completedLevels, 6);
+    updateProgress();
+    renderLevels();
+    // close the modal in case the Heist was played embedded
+    const modal = document.getElementById('heist-modal');
+    if (modal && modal.classList.contains('open')) {
+      setTimeout(() => { modal.classList.remove('open'); document.body.classList.remove('heist-open'); }, 600);
+    }
+    showWarpBanner(xp, rank);
+  }
+  window.addEventListener('message', (e) => {
+    if (e && e.data && e.data.type === 'heist-complete') {
+      onHeistComplete(e.data.xp, e.data.rank);
+    }
+  });
+
+  /* Sticky banner offering the learner the two paths after winning the Heist */
+  function showWarpBanner(xp, rank) {
+    if (document.getElementById('warp-banner')) return;
+    const xpLine = (typeof xp === 'number' && xp > 0) ? `+${xp} bonus XP · rank <b>${rank}</b>` : '';
+    const banner = document.createElement('div');
+    banner.id = 'warp-banner';
+    banner.style.cssText = 'position:sticky;top:0;z-index:200;background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;padding:18px 24px;border-radius:0 0 24px 24px;box-shadow:0 12px 40px rgba(0,0,0,.3);margin:-32px -32px 32px -32px;';
+    banner.innerHTML = `
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;">
+        <div style="flex:1;min-width:240px;">
+          <div style="font-weight:800;font-size:18px;">🏆 Vault Cleared! ${xpLine}</div>
+          <div style="font-size:13px;opacity:0.95;margin-top:2px;">Levels 4, 5 &amp; 6 are now unlocked. Your choice:</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button onclick="toggleDetail(6);document.getElementById('warp-banner').remove();" style="background:#fff;color:#dc2626;border:0;padding:10px 18px;border-radius:999px;font-weight:700;cursor:pointer;font-size:13px;">🎯 Warp to Level 6 (Boss)</button>
+          <button onclick="toggleDetail(4);document.getElementById('warp-banner').remove();" style="background:rgba(0,0,0,0.25);color:#fff;border:1px solid rgba(255,255,255,0.4);padding:10px 18px;border-radius:999px;font-weight:600;cursor:pointer;font-size:13px;">📚 Continue with L4</button>
+          <button onclick="document.getElementById('warp-banner').remove();" aria-label="Dismiss" style="background:transparent;color:#fff;border:0;font-size:18px;cursor:pointer;padding:0 6px;">×</button>
+        </div>
+      </div>`;
+    const container = document.querySelector('.max-w-7xl') || document.body;
+    container.insertBefore(banner, container.firstChild);
+    setTimeout(() => banner.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+  }
+
+  function toggleDetail(id) {
+    const panel = document.getElementById('detail-panel');
+    let html = '';
+
+    /* ============================================================
+       LEVEL 1 — Curious Student (unchanged)
+       ============================================================ */
+    if (id === 1) {
+      html = `
+        <h2 class="text-3xl font-bold mb-6">🥇 Level 1 — Curious Student (100 XP)</h2>
+        <p class="text-emerald-600 font-semibold text-xl mb-8">Mission: Word Hunter</p>
+        <div class="mb-10"><a href="https://youtu.be/Fi17zN_bS4I?si=fQGIrypoLTxp4pBF" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-red-700"><i class="fab fa-youtube text-3xl"></i> ▶️ Watch YouTube Video</a></div>
+        <div class="mb-10"><a href="https://canva.link/hlk1njujiclcf8u" target="_blank" class="text-indigo-600 hover:underline text-lg">📌 Canva Resource (VIDEO)</a></div>
+        <div class="mb-10"><div style="position:relative;width:100%;height:0;padding-top:100%;box-shadow:0 2px 8px 0 rgba(63,69,81,0.16);margin:1.6em 0;overflow:hidden;border-radius:8px;"><iframe loading="lazy" style="position:absolute;width:100%;height:100%;top:0;left:0;border:none" src="https://www.canva.com/design/DAHJ1r_ShVQ/YVvw82AAegvGM3003cNAxg/view?embed" allowfullscreen></iframe></div><a href="https://canva.link/23eif7lju07vmwp" target="_blank" class="text-indigo-600 hover:underline text-lg">📌 Open Full Canva Presentation</a></div>
+        <div class="mb-10"><a href="https://chatgpt.com/g/g-6a073b81b0e08191942bd770676aab26-phd-chema" target="_blank" class="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-emerald-700">🤖 Open PhD Chema GPT</a><div class="mt-6 bg-gray-100 p-5 rounded-2xl font-mono">Help me start my first research article</div></div>
+
+        <h2 class="text-2xl font-bold mb-8 text-indigo-600">Level 1 Worksheet – Word Hunter</h2>
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 1: Your Academic Paragraph from PhD Chema</h3>
+        <textarea class="w-full h-48 border border-gray-300 rounded-2xl p-6 text-sm" placeholder="Paste the 150-word paragraph from PhD Chema here and underline 10 AWL items..."></textarea>
+
+        <h3 class="text-xl font-semibold mt-12 mb-4 text-indigo-600">Section 2: Word Families</h3>
+        <table class="w-full border-collapse text-sm mb-10">
+          <tr class="bg-gray-100"><th class="p-4 text-left">AWL Headword</th><th class="p-4">Noun</th><th class="p-4">Verb</th><th class="p-4">Adjective</th><th class="p-4">Adverb</th></tr>
+          <tr><td class="p-4 border">1.</td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td></tr>
+          <tr><td class="p-4 border">2.</td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td></tr>
+          <tr><td class="p-4 border">3.</td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td></tr>
+          <tr><td class="p-4 border">4.</td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td></tr>
+          <tr><td class="p-4 border">5.</td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td><td class="p-4 border"></td></tr>
+        </table>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 3: Academic Collocations</h3>
+        <div class="space-y-3 mb-12">
+          <div class="flex items-center gap-3"><span class="font-medium w-28">Collocation 1:</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="Type verb + noun pair here"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-28">Collocation 2:</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="Type verb + noun pair here"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-28">Collocation 3:</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="Type verb + noun pair here"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-28">Collocation 4:</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="Type verb + noun pair here"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-28">Collocation 5:</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="Type verb + noun pair here"></div>
+        </div>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 4: Mission Proof</h3>
+        <a href="https://profeanaeslava.my.canva.site/1-check-point-awl-quiz" target="_blank" class="px-6 py-3 bg-blue-600 text-white rounded-2xl">✅ Easy Quiz</a>
+        <a href="https://profeanaeslava.my.canva.site/academic-language-spelling-quiz" target="_blank" class="px-6 py-3 bg-purple-600 text-white rounded-2xl">🔥 Hard Quiz</a>
+        <div class="border-2 border-dashed border-gray-300 rounded-3xl h-48 flex items-center justify-center text-gray-400 mt-8">Paste PhD Chema badge screenshot here</div>
+
+        <button onclick="completeLevel(1)" class="mt-12 w-full bg-emerald-600 text-white py-5 rounded-3xl font-bold">✅ Mark Level 1 Complete & Unlock Level 2</button>
+      `;
+    }
+
+    /* ============================================================
+       LEVEL 2 — Apprentice Researcher · Speed-Reader's Gauntlet
+       Mirrors the canonical Canva design (Activities 2.1, 2.2, 2.3)
+       ============================================================ */
+    else if (id === 2) {
+      html = `
+        <h2 class="text-3xl font-bold mb-2">🥈 Level 2 — Apprentice Researcher (200 XP)</h2>
+        <p class="text-emerald-600 font-semibold text-xl mb-2">Mission: Speed-Reader's Gauntlet</p>
+        <p class="text-sm text-gray-600 mb-8">Hour 2 of 6 · 60 min · Reading focus — skim, scan, infer · Q4 → Q1 stance awareness</p>
+
+        <!-- Your name -->
+        <div class="flex items-center gap-4 mb-10 pb-6 border-b border-gray-200">
+          <label class="font-bold text-indigo-600 shrink-0">Your name:</label>
+          <input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Type your name here">
+        </div>
+
+        <!-- ===== Activity 2.1 — Instruction ===== -->
+        <div class="section-banner mb-6">Activity 2.1 — Instruction · Skim, Scan, Infer</div>
+
+        <!-- Intro video -->
+        <div class="mb-8">
+          <a href="https://youtu.be/w3eHJc2uMOg?si=xJlABcMYjb9progs" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-red-700">
+            <i class="fab fa-youtube text-3xl"></i> ▶️ LEVEL 2 — How to identify Swales' moves in abstract writing
+          </a>
+        </div>
+
+        <!-- Abstract Detective infographic (Canva embed) -->
+        <div class="mb-6">
+          <p class="text-sm text-gray-600 mb-3">📌 <strong>The Abstract Detective</strong> — 3 steps to master research reading</p>
+          <div style="position:relative;width:100%;height:0;padding-top:100%;box-shadow:0 2px 8px 0 rgba(63,69,81,0.16);margin:0.8em 0;overflow:hidden;border-radius:8px;">
+            <iframe loading="lazy" style="position:absolute;width:100%;height:100%;top:0;left:0;border:none" src="https://www.canva.com/design/DAHK9n1ObDE/pXLp8_J-OB4RZsQPyDaKCg/view?embed" allowfullscreen></iframe>
+          </div>
+          <a href="https://www.canva.com/design/DAHK9n1ObDE/pXLp8_J-OB4RZsQPyDaKCg/view" target="_blank" class="text-indigo-600 hover:underline text-sm">📌 Open the infographic in Canva</a>
+        </div>
+
+        <!-- ===== Activity 2.2 — Mission · Speed-Reader's Log ===== -->
+        <div class="section-banner mb-6">Activity 2.2 — Mission · Speed-Reader's Log</div>
+        <p class="text-gray-700 mb-8"><strong>Solo work:</strong> identify and analyse Swales' moves in five academic abstracts. Edit and submit this worksheet on completion.</p>
+
+        <!-- Section 1 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 1: Your Academic Reading Practice with PhD Chema</h3>
+
+        <div class="mb-4">
+          <a href="https://chatgpt.com/g/g-6a073b81b0e08191942bd770676aab26-phd-chema" target="_blank" class="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-emerald-700">🤖 Open PhD Chema GPT</a>
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2"><strong>Select / paste this prompt:</strong></p>
+        <div class="bg-gray-100 p-5 rounded-2xl font-mono text-sm mb-4">
+          "I'm currently at level 2 and need assistance in recognising the key strategies within an abstract context. How can I identify Swales's moves in such an abstract setting? Could you please provide me with some guiding questions?"
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Paste the Swales moves explanation paragraph below the one PhD Chema helped you with:</p>
+        <div class="green-box mb-10">
+          <textarea class="w-full h-44 bg-transparent border-0 outline-none text-sm" placeholder="Type or paste PhD Chema's explanation here..."></textarea>
+        </div>
+
+        <!-- Section 2 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 2: Research and Read… a Lot!</h3>
+        <div class="mb-4">
+          <a href="https://scholar.google.com" target="_blank" class="inline-flex items-center gap-3 bg-blue-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-blue-700">
+            <i class="fab fa-google"></i> Open Google Scholar
+          </a>
+        </div>
+        <p class="text-sm text-gray-700 mb-1"><strong>Task:</strong> find five abstracts in your field and provide one DOI for each.</p>
+        <p class="text-xs text-gray-500 mb-4">Example: <code>https://doi.org/10.1080/14703297.2026.2681699</code></p>
+
+        <div class="space-y-3 mb-10">
+          <div class="flex items-center gap-3"><span class="font-medium w-12 text-indigo-600">1.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="https://doi.org/..."></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-12 text-indigo-600">2.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="https://doi.org/..."></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-12 text-indigo-600">3.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="https://doi.org/..."></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-12 text-indigo-600">4.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="https://doi.org/..."></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-12 text-indigo-600">5.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3" placeholder="https://doi.org/..."></div>
+        </div>
+
+        <!-- Section 3 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 3: Swales' Moves on the Go</h3>
+        <p class="text-sm text-gray-700 mb-4">Use the <strong>Swales Move Analyzer</strong> to identify and analyse the moves in your abstracts:</p>
+
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a href="https://canva.link/2b0fbto8pxnggsu" target="_blank" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-indigo-700">🛠 Open the Swales Move Analyzer</a>
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2">Next, return to PhD Chema and paste your results using this prompt:</p>
+        <div class="bg-gray-100 p-5 rounded-2xl font-mono text-sm mb-4">"Evaluate the analysis I conducted on these abstracts."</div>
+        <p class="text-sm text-gray-600 mb-3">Capture PhD Chema's feedback / your reflection notes:</p>
+        <div class="green-box mb-12">
+          <ul class="list-disc ml-6 space-y-2">
+            <li><input type="text" class="w-full bg-transparent border-0 border-b border-emerald-300 px-1 py-1 text-sm outline-none" placeholder="Feedback note 1..."></li>
+            <li><input type="text" class="w-full bg-transparent border-0 border-b border-emerald-300 px-1 py-1 text-sm outline-none" placeholder="Feedback note 2..."></li>
+            <li><input type="text" class="w-full bg-transparent border-0 border-b border-emerald-300 px-1 py-1 text-sm outline-none" placeholder="Feedback note 3..."></li>
+          </ul>
+        </div>
+
+        <!-- ===== Activity 2.3 — Check-Point ===== -->
+        <div class="section-banner mb-6">Activity 2.3 — Check-Point · Q-Sorting Quiz</div>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 4: Mission Proof</h3>
+        <p class="text-sm text-gray-700 mb-4">⭐ Reach <strong>≥ 5/6</strong> on the quiz to unlock the Apprentice Researcher badge and 200 XP.</p>
+
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="https://profeanaeslava.my.canva.site/level2quiz" target="_blank" class="px-6 py-3 bg-purple-600 text-white rounded-2xl font-semibold hover:bg-purple-700">🎯 Take the Q-Sorting Quiz</a>
+        </div>
+
+        <!-- Assessment rubric (transparent to learners) -->
+        <details class="mb-8 bg-gray-50 rounded-2xl p-4">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📊 How you'll be assessed</summary>
+          <table class="w-full text-sm mt-4">
+            <tr class="bg-gray-100"><th class="p-3 text-left">Criterion</th><th class="p-3 text-left">Meets (full XP)</th><th class="p-3 text-left">Approaches (50% XP)</th></tr>
+            <tr><td class="p-3 border">Gauntlet score (PhD Chema)</td><td class="p-3 border">≥ 9/12 across 4 abstracts</td><td class="p-3 border">6–8/12</td></tr>
+            <tr><td class="p-3 border">Speed-Reader's Log completeness</td><td class="p-3 border">All 16 cells filled accurately</td><td class="p-3 border">Up to 4 cells missing or incorrect</td></tr>
+            <tr><td class="p-3 border">Q-sorting quiz</td><td class="p-3 border">≥ 5/6 abstracts placed correctly</td><td class="p-3 border">3–4 correct</td></tr>
+          </table>
+        </details>
+
+        <!-- Checkpoint: badge screenshot -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-2xl mb-4">
+          <p class="font-bold text-sm">🚩 Checkpoint</p>
+          <p class="text-sm text-gray-700">Paste your PhD Chema badge confirmation screenshot below to unlock 200 XP.</p>
+        </div>
+        <div class="border-2 border-dashed border-gray-300 rounded-3xl h-48 flex items-center justify-center text-gray-400 mb-2">Paste Silver Notebook badge screenshot here</div>
+        <p class="text-xs text-gray-500 mb-8 italic">Submit this worksheet back to your teacher when complete.</p>
+
+        <!-- ===== Class Notes (EXTRA INFO) — canonical placement at end of worksheet ===== -->
+        <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-600">Class Notes (Extra Info)</h3>
+        <div class="mb-8 bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-2xl">
+          <p class="text-sm font-semibold mb-2">📚 Level 2 — Skim, Scan, Infer · Class Notes PDF</p>
+          <a href="https://canva.link/p60du5op9mf0oys" target="_blank" class="text-indigo-600 hover:underline text-sm break-all">https://canva.link/p60du5op9mf0oys</a>
+        </div>
+
+        <!-- ===== OPTIONAL BONUS: The Abstract Heist (delete this block if not used) ===== -->
+        <div class="bg-gradient-to-r from-amber-50 to-yellow-100 border-2 border-amber-300 rounded-3xl p-6 mb-8">
+          <div class="text-xs uppercase tracking-widest text-amber-700 font-bold mb-2">Optional · Bonus Gamified Practice</div>
+          <div class="flex items-center gap-4 mb-3">
+            <span class="text-5xl">🔎</span>
+            <div>
+              <h4 class="font-bold text-lg text-amber-900">The Abstract Heist — escape-room edition</h4>
+              <p class="text-sm text-amber-800">Crack 3 vaults (Skim → Scan → Infer) to assemble the master code <code class="bg-white px-2 py-1 rounded">WATER-81-SAFE</code>. Earn the Master Spy rank for ≥ 170 XP. Built on the same Swales-moves framework as the canonical quiz.</p>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="completeLevel(2)" class="mt-6 w-full bg-emerald-600 text-white py-5 rounded-3xl font-bold">✅ Mark Level 2 Complete & Unlock Level 3</button>
+      `;
+    }
+
+    /* ============================================================
+       LEVEL 3 — Junior Scholar · Grammar Forge
+       Hyland's metadiscourse (Interactive + Interactional) + academic grammar
+       ============================================================ */
+    else if (id === 3) {
+      html = `
+        <h2 class="text-3xl font-bold mb-2">🥉 Level 3 — Junior Scholar (300 XP)</h2>
+        <p class="text-emerald-600 font-semibold text-xl mb-2">Mission: Grammar Forge</p>
+        <p class="text-sm text-gray-600 mb-8">Hour 3 of 6 · 60 min · Hyland's metadiscourse (Interactive + Interactional) · Academic grammar · APA 7th micro-conventions</p>
+
+        <!-- Your name -->
+        <div class="flex items-center gap-4 mb-10 pb-6 border-b border-gray-200">
+          <label class="font-bold text-indigo-600 shrink-0">Your name:</label>
+          <input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Type your name here">
+        </div>
+
+        <!-- ===== Activity 3.1 — Instruction ===== -->
+        <div class="section-banner mb-6">Activity 3.1 — Instruction · Forge the Grammar + Hyland Markers</div>
+
+        <!-- Intro video -->
+        <div class="mb-6">
+          <a href="https://youtu.be/EwLE-qYaPto?si=rMwHDpBkloFxcxkz" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-red-700">
+            <i class="fab fa-youtube text-3xl"></i> ▶️ LEVEL 3 — Introduction to Hyland's metadiscourse
+          </a>
+        </div>
+
+        <!-- Wayground gamified activity -->
+        <div class="mb-10">
+          <a href="https://wayground.com/admin/quiz/6a20c80dec14b711446185e3?fromPage=rc_ela&comprehensionType=video_media" target="_blank" class="inline-flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-blue-700">
+            🎮 Wayground · Embedded video challenge
+          </a>
+          <p class="text-xs text-gray-500 mt-2 ml-2">Completion of all embedded questions signals Activity 3.1 done in the Reporting tab.</p>
+        </div>
+
+        <!-- Hyland Reference Board: 10 categories (Interactive + Interactional) -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Hyland's Metadiscourse · Reference Board</h3>
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+          <!-- Interactive column -->
+          <div>
+            <h4 class="font-bold mb-3 flex items-center gap-2" style="color:#a16207">🟡 Interactive Resources <span class="text-xs font-normal text-gray-500">(organise the text)</span></h4>
+            <div class="space-y-2">
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Transitions</div>
+                <div class="text-xs text-gray-600">Connect ideas logically.</div>
+                <div class="text-xs italic mt-1 text-gray-700">furthermore, however, consequently, in addition</div>
+              </div>
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Frame Markers</div>
+                <div class="text-xs text-gray-600">Sequence material; structure the discourse.</div>
+                <div class="text-xs italic mt-1 text-gray-700">first, finally, to conclude, my purpose here is</div>
+              </div>
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Endophoric Markers</div>
+                <div class="text-xs text-gray-600">Refer to info in other parts of the same text.</div>
+                <div class="text-xs italic mt-1 text-gray-700">see Figure 2, as noted above, in Section 4</div>
+              </div>
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Evidentials</div>
+                <div class="text-xs text-gray-600">Cite community-recognised external sources.</div>
+                <div class="text-xs italic mt-1 text-gray-700">According to Swales (1990), Smith argues that…</div>
+              </div>
+              <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Code Glosses</div>
+                <div class="text-xs text-gray-600">Clarify, rephrase, or expand a meaning.</div>
+                <div class="text-xs italic mt-1 text-gray-700">in other words, such as, meaning that</div>
+              </div>
+            </div>
+          </div>
+          <!-- Interactional column -->
+          <div>
+            <h4 class="font-bold mb-3 flex items-center gap-2" style="color:#c2410c">🟠 Interactional Resources <span class="text-xs font-normal text-gray-500">(engage the reader)</span></h4>
+            <div class="space-y-2">
+              <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Hedges</div>
+                <div class="text-xs text-gray-600">Withhold commitment; express caution.</div>
+                <div class="text-xs italic mt-1 text-gray-700">may, suggests, possible, perhaps, indicates</div>
+              </div>
+              <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Boosters</div>
+                <div class="text-xs text-gray-600">Emphasise certainty; close down alternatives.</div>
+                <div class="text-xs italic mt-1 text-gray-700">clearly, obviously, demonstrates, definitely</div>
+              </div>
+              <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Attitude Markers</div>
+                <div class="text-xs text-gray-600">Express the writer's appraisal of the content.</div>
+                <div class="text-xs italic mt-1 text-gray-700">unfortunately, surprisingly, agreeably, relevant</div>
+              </div>
+              <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Engagement Markers</div>
+                <div class="text-xs text-gray-600">Address the reader directly.</div>
+                <div class="text-xs italic mt-1 text-gray-700">note that, consider, you, let us look at</div>
+              </div>
+              <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded-r-xl">
+                <div class="font-bold text-sm">Self-Mentions</div>
+                <div class="text-xs text-gray-600">Show explicit authorial presence.</div>
+                <div class="text-xs italic mt-1 text-gray-700">I, we, my, our, this thesis</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Activity 3.2 — Mission · Metadiscourse Markers Game + Application ===== -->
+        <div class="section-banner mb-6">Activity 3.2 — Mission · Metadiscourse Markers Game + Application</div>
+        <p class="text-gray-700 mb-8"><strong>Solo work:</strong> identify, classify, and analyse Hyland's metadiscourse markers — focusing on hedges, boosters, attitude markers and self-mentions — across academic abstracts. Edit and submit this worksheet on completion.</p>
+
+        <!-- Section 1 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 1: Your Academic Reading Practice with PhD Chema</h3>
+
+        <div class="mb-4">
+          <a href="https://chatgpt.com/g/g-6a073b81b0e08191942bd770676aab26-phd-chema" target="_blank" class="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-emerald-700">🤖 Open PhD Chema GPT</a>
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2"><strong>Select / paste this prompt:</strong></p>
+        <div class="bg-gray-100 p-5 rounded-2xl font-mono text-sm mb-4">
+          "You are PhD Chema. I am at Level 3: Grammar Forge. Give me three progressively harder challenges focused on identifying, classifying, and using Hyland's metadiscourse markers (especially hedges, boosters, and reporting verbs) combined with grammar accuracy (passives, complex noun phrases). I need to score at least 14/19 to unlock the Junior Scholar badge."
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Paste the metadiscourse markers (particularly hedges, boosters, and reporting verbs) that PhD Chema assisted you with. Add your insights on the moves you identified in the five abstracts you chose from Level 2:</p>
+        <div class="green-box mb-10">
+          <textarea class="w-full h-44 bg-transparent border-0 outline-none text-sm" placeholder="Type your answer here..."></textarea>
+        </div>
+
+        <!-- Section 2 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 2: Identify &amp; Classify the Metadiscourse Markers</h3>
+        <p class="text-sm text-gray-700 mb-4">Use the Canva activity to identify and classify markers across the 10 Hyland categories shown in the reference board above.</p>
+
+        <div class="flex flex-wrap gap-3 mb-12">
+          <a href="https://profeanaeslava.my.canva.site/level3metamarks" target="_blank" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-indigo-700">🔬 Open the Metadiscourse Marker Activity</a>
+        </div>
+
+        <!-- ===== Activity 3.3 — Check-Point ===== -->
+        <div class="section-banner mb-6">Activity 3.3 — Check-Point · Metadiscourse Quiz</div>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 3: Mission Proof</h3>
+        <p class="text-sm text-gray-700 mb-4">⭐ Reach <strong>≥ 80% (8/10)</strong> on the quiz <strong>and ≥ 14/19</strong> in the PhD Chema challenges to unlock the Junior Scholar badge and 300 XP.</p>
+
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="https://profeanaeslava.my.canva.site/level3metamarks" target="_blank" class="px-6 py-3 bg-purple-600 text-white rounded-2xl font-semibold hover:bg-purple-700">🎯 Take the Metadiscourse Quiz</a>
+          <a href="https://www.canva.com/design/DAHLkrc2fIg/pjS9diNtfX4rJFlXAStu5A/view" target="_blank" class="px-6 py-3 bg-white border border-purple-600 text-purple-600 rounded-2xl font-medium hover:bg-purple-50">🏅 Open Checkpoint (Canva)</a>
+        </div>
+
+        <!-- Assessment rubric -->
+        <details class="mb-8 bg-gray-50 rounded-2xl p-4">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📊 How you'll be assessed</summary>
+          <table class="w-full text-sm mt-4">
+            <tr class="bg-gray-100"><th class="p-3 text-left">Criterion</th><th class="p-3 text-left">Meets (full XP)</th><th class="p-3 text-left">Approaches (50% XP)</th></tr>
+            <tr><td class="p-3 border">PhD Chema challenges</td><td class="p-3 border">≥ 14/19 overall</td><td class="p-3 border">10–13/19</td></tr>
+            <tr><td class="p-3 border">Metadiscourse marker identification</td><td class="p-3 border">Correctly identifies and classifies most markers</td><td class="p-3 border">Identifies some but struggles with classification</td></tr>
+            <tr><td class="p-3 border">Application task (highlighting)</td><td class="p-3 border">Clear highlights + good justification</td><td class="p-3 border">Partial highlighting with weak justification</td></tr>
+            <tr><td class="p-3 border">Grammar accuracy</td><td class="p-3 border">Accurate passives, noun phrases, hedging</td><td class="p-3 border">Some issues but meaning is clear</td></tr>
+            <tr><td class="p-3 border">Mixed Quiz (3.3)</td><td class="p-3 border">≥ 80% (8/10)</td><td class="p-3 border">60–79%</td></tr>
+          </table>
+        </details>
+
+        <!-- Checkpoint: badge screenshot -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-2xl mb-4">
+          <p class="font-bold text-sm">🚩 Checkpoint</p>
+          <p class="text-sm text-gray-700">Paste your PhD Chema badge confirmation screenshot below to unlock 300 XP and the Golden Microscope.</p>
+        </div>
+        <div class="border-2 border-dashed border-gray-300 rounded-3xl h-48 flex items-center justify-center text-gray-400 mb-2">Paste Golden Microscope badge screenshot here</div>
+        <p class="text-xs text-gray-500 mb-8 italic">Submit this worksheet back to your teacher when complete.</p>
+
+        <!-- ===== Class Notes (EXTRA INFO) — canonical placement at end of worksheet ===== -->
+        <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-600">Class Notes (Extra Info)</h3>
+        <div class="mb-8 bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-2xl">
+          <p class="text-sm font-semibold mb-2">📚 Level 3 — Hyland's Metadiscourse · Class Notes PDF</p>
+          <p class="text-xs text-gray-600 mb-1">Includes the cake analogy, the full Interactive / Interactional breakdown, Swales × metadiscourse mapping, and the academic-grammar support (passives, complex noun phrases, hedging mechanics).</p>
+          <a href="https://canva.link/2867ileroz1jqqq" target="_blank" class="text-indigo-600 hover:underline text-sm break-all">https://canva.link/2867ileroz1jqqq</a>
+        </div>
+
+        <button onclick="completeLevel(3)" class="mt-6 w-full bg-emerald-600 text-white py-5 rounded-3xl font-bold">✅ Mark Level 3 Complete &amp; Unlock Level 4</button>
+      `;
+    }
+
+    /* ============================================================
+       LEVEL 4 — Developing Author · TED Quest
+       Metadiscourse & Academic Signposting (listening + discipline transfer)
+       Canonical worksheet: TED-Ed guided practice → Reflection & Discipline Transfer
+       ============================================================ */
+    else if (id === 4) {
+      html = `
+        <h2 class="text-3xl font-bold mb-2">🏅 Level 4 — Developing Author (400 XP)</h2>
+        <p class="text-emerald-600 font-semibold text-xl mb-2">Mission: TED Quest</p>
+        <p class="text-sm text-gray-600 mb-8">Hour 4 of 6 · 60 min · Metadiscourse &amp; academic signposting · TED-Ed listening · Cornell notes · Discipline transfer</p>
+
+        <!-- Your name -->
+        <div class="flex items-center gap-4 mb-10 pb-6 border-b border-gray-200">
+          <label class="font-bold text-indigo-600 shrink-0">Your name:</label>
+          <input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Type your name here">
+        </div>
+
+        <!-- ===== Activity 4.1 — Instruction · Guided Practice with TED-Ed Lesson ===== -->
+        <div class="section-banner mb-6">Activity 4.1 — Guided Practice with TED-Ed Lesson</div>
+        <p class="text-sm text-gray-700 mb-3"><strong>Recognising spoken markers</strong> in TED-Ed Lessons &amp; your discipline.</p>
+
+        <!-- TED-Ed video link -->
+        <div class="mb-6">
+          <a href="https://ed.ted.com/lessons/first-person-vs-second-person-vs-third-person-rebekah-bergman" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-red-700">
+            <i class="fab fa-youtube text-3xl"></i> 📺 TED-Ed Lesson — "First, Second &amp; Third Person" · Rebekah Bergman (~5 min)
+          </a>
+        </div>
+
+        <!-- TED-Ed 4-step protocol -->
+        <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">TED-Ed listening protocol</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div class="bg-red-50 border border-red-200 rounded-2xl p-3 text-center">
+            <div class="font-bold text-red-700 text-sm">▶ Watch</div>
+            <div class="text-xs text-gray-600 mt-1">Open-mic listen</div>
+          </div>
+          <div class="bg-orange-50 border border-orange-200 rounded-2xl p-3 text-center">
+            <div class="font-bold text-orange-700 text-sm">💭 Think</div>
+            <div class="text-xs text-gray-600 mt-1">Embedded MCQ</div>
+          </div>
+          <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-3 text-center">
+            <div class="font-bold text-yellow-700 text-sm">🔎 Dig Deeper</div>
+            <div class="text-xs text-gray-600 mt-1">Extension reading</div>
+          </div>
+          <div class="bg-green-50 border border-green-200 rounded-2xl p-3 text-center">
+            <div class="font-bold text-green-700 text-sm">💬 Discuss</div>
+            <div class="text-xs text-gray-600 mt-1">Reflective prompts</div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-2xl mb-10">
+          <p class="text-sm"><strong>💡 Listening tip:</strong> focus especially on <em>frame markers</em> (e.g. "let me start by…"), <em>transitions</em> ("however," "in addition"), <em>engagement markers</em> ("you"), <em>hedges</em> ("perhaps"), and <em>boosters</em> ("clearly"). The speaker uses them constantly to guide you — your job is to catch them.</p>
+        </div>
+
+        <!-- Collapsible Hyland & Tse Taxonomy quick reference -->
+        <details class="mb-12 bg-white border border-gray-200 rounded-2xl p-5">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📑 Hyland &amp; Tse Taxonomy — quick reference (Interactive + Interactional · 10 categories)</summary>
+          <table class="w-full text-xs mt-4">
+            <thead><tr class="bg-gray-100"><th class="p-2 text-left">Category</th><th class="p-2 text-left">Function</th><th class="p-2 text-left">Examples</th></tr></thead>
+            <tbody>
+              <tr class="bg-yellow-50"><td colspan="3" class="p-2 font-bold text-yellow-800">🟡 Interactive resources — guide the reader through the text</td></tr>
+              <tr><td class="p-2 border font-bold">Transitions</td><td class="p-2 border">Semantic relation between main clauses</td><td class="p-2 border italic">in addition · but · thus · and</td></tr>
+              <tr><td class="p-2 border font-bold">Frame markers</td><td class="p-2 border">Discourse acts, sequences, text stages</td><td class="p-2 border italic">finally · to conclude · my purpose here is to</td></tr>
+              <tr><td class="p-2 border font-bold">Endophoric markers</td><td class="p-2 border">Refer to info in other parts of the text</td><td class="p-2 border italic">noted above · see Fig · in section 2</td></tr>
+              <tr><td class="p-2 border font-bold">Evidentials</td><td class="p-2 border">Source of info from other texts</td><td class="p-2 border italic">according to X · (Y, 1990) · Z states</td></tr>
+              <tr><td class="p-2 border font-bold">Code glosses</td><td class="p-2 border">Help readers grasp ideational meaning</td><td class="p-2 border italic">namely · e.g. · such as · in other words</td></tr>
+              <tr class="bg-orange-50"><td colspan="3" class="p-2 font-bold text-orange-800">🟠 Interactional resources — involve the reader in the argument</td></tr>
+              <tr><td class="p-2 border font-bold">Hedges</td><td class="p-2 border">Withhold writer's full commitment</td><td class="p-2 border italic">might · perhaps · possible · about</td></tr>
+              <tr><td class="p-2 border font-bold">Boosters</td><td class="p-2 border">Emphasise force / writer's certainty</td><td class="p-2 border italic">in fact · definitely · it is clear that</td></tr>
+              <tr><td class="p-2 border font-bold">Attitude markers</td><td class="p-2 border">Writer's attitude to proposition</td><td class="p-2 border italic">unfortunately · I agree · surprisingly</td></tr>
+              <tr><td class="p-2 border font-bold">Engagement markers</td><td class="p-2 border">Build a relationship with the reader</td><td class="p-2 border italic">consider · note that · you can see that</td></tr>
+              <tr><td class="p-2 border font-bold">Self-mentions</td><td class="p-2 border">Explicit reference to author(s)</td><td class="p-2 border italic">I · we · my · our</td></tr>
+            </tbody>
+          </table>
+          <p class="text-xs text-gray-500 mt-3 italic">Adapted from Hyland &amp; Tse (2004). Source: <em>Level 4 EXTRA · Interactive Hyland &amp; Tse Taxonomy</em>.</p>
+        </details>
+
+        <!-- ===== Activity 4.2 — Mission · Reflection & Transfer to Your Discipline ===== -->
+        <div class="section-banner mb-6">Activity 4.2 — Mission · Reflection &amp; Transfer to Your Discipline</div>
+        <p class="text-gray-700 mb-8"><strong>Solo work:</strong> bring metadiscourse into your own field. Pick a TED Talk from your discipline, take Cornell notes on it, and identify the spoken signposting markers the speaker uses. Edit and submit this worksheet on completion.</p>
+
+        <!-- Section 1 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 1: Your Academic Reading Practice with PhD Chema</h3>
+
+        <div class="mb-4">
+          <a href="https://chatgpt.com/g/g-6a073b81b0e08191942bd770676aab26-phd-chema" target="_blank" class="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-emerald-700">🤖 Open PhD Chema GPT</a>
+        </div>
+
+        <!-- Discipline live-substitution -->
+        <div class="flex items-center gap-3 mb-4 bg-indigo-50 border border-indigo-200 rounded-2xl p-4">
+          <label class="font-medium text-indigo-700 text-sm shrink-0">My discipline is:</label>
+          <input type="text" id="l4-discipline" oninput="document.querySelectorAll('.l4-disc-out').forEach(el => el.textContent = this.value || '[your discipline]')" class="flex-1 border border-indigo-300 rounded-xl px-3 py-2 text-sm" placeholder="e.g. mechanical engineering, applied linguistics, public health…">
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2"><strong>Select / paste this prompt</strong> (your discipline auto-fills below):</p>
+        <div class="bg-gray-100 p-5 rounded-2xl font-mono text-sm mb-4">
+          "I am at Level 4: TED Quest. My discipline is <span class="l4-disc-out font-bold text-indigo-700">[your discipline]</span>. Recommend 3 TED Talks (6–10 min) in my field. After I choose and watch one, ask me: (1) 50-word thesis in my own words; (2) 5 signposting expressions + their function; (3) Cornell notes (cue / notes / 50-word summary). Stage-2 corrective feedback. Unlock the Developing Author badge if my summary captures the thesis, <strong>AND</strong> I identify ≥4 signposting expressions."
+        </div>
+
+        <!-- Cornell notes mini-explainer -->
+        <details class="mb-4 bg-gray-50 rounded-2xl p-3">
+          <summary class="cursor-pointer text-xs font-semibold text-indigo-700 uppercase tracking-wider">📓 What is the Cornell Method? (30-second refresher)</summary>
+          <div class="grid grid-cols-3 gap-3 mt-3 text-xs">
+            <div class="bg-white border rounded-xl p-3"><div class="font-bold text-indigo-600">CUE</div><div class="text-gray-600 mt-1">Left column · keywords, questions, marker categories you spotted</div></div>
+            <div class="bg-white border rounded-xl p-3"><div class="font-bold text-indigo-600">NOTES</div><div class="text-gray-600 mt-1">Right column · what the speaker said, in your own words</div></div>
+            <div class="bg-white border rounded-xl p-3 col-span-3"><div class="font-bold text-indigo-600">SUMMARY (50 words)</div><div class="text-gray-600 mt-1">Bottom row · the talk's thesis distilled — your test of comprehension</div></div>
+          </div>
+        </details>
+
+        <p class="text-sm text-gray-600 mb-3">Record your Cornell notes and the discipline-specific signposting expressions you identified in the TED Talk you chose:</p>
+        <div class="green-box mb-10">
+          <textarea class="w-full h-56 bg-transparent border-0 outline-none text-sm font-mono" placeholder="CUE   |   NOTES&#10;-----+--------------------&#10;Frame marker  |  &#10;Transition    |  &#10;Engagement    |  &#10;Hedge / Boost |  &#10;&#10;50-word summary:&#10;"></textarea>
+        </div>
+
+        <!-- Section 2 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 2: Play time — Hyland Taxonomy Practice</h3>
+        <p class="text-sm text-gray-700 mb-4">Drill the 10 categories with the interactive Canva game. Match each marker to its rhetorical function.</p>
+
+        <div class="flex flex-wrap gap-3 mb-12">
+          <a href="https://profeanaeslava.my.canva.site/level4hylandtaxonomy" target="_blank" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-indigo-700">🎮 Open the Hyland Taxonomy Practice</a>
+        </div>
+
+        <!-- ===== Activity 4.3 — Check-Point · Mission Proof ===== -->
+        <div class="section-banner mb-6">Activity 4.3 — Check-Point · Mission Proof</div>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 3: Mission Proof</h3>
+        <p class="text-sm text-gray-700 mb-4">⭐ PhD Chema unlocks the Developing Author badge when your <strong>summary captures the thesis</strong> AND you identify <strong>≥ 4 signposting expressions</strong>. Then take the quiz below to bank the 400 XP.</p>
+
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="https://profeanaeslava.my.canva.site/level4quiz" target="_blank" class="px-6 py-3 bg-purple-600 text-white rounded-2xl font-semibold hover:bg-purple-700">🎯 Take the Level 4 Quiz</a>
+        </div>
+
+        <!-- Assessment rubric -->
+        <details class="mb-8 bg-gray-50 rounded-2xl p-4">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📊 How you'll be assessed</summary>
+          <table class="w-full text-sm mt-4">
+            <tr class="bg-gray-100"><th class="p-3 text-left">Criterion</th><th class="p-3 text-left">Meets (full XP)</th><th class="p-3 text-left">Approaches (50% XP)</th></tr>
+            <tr><td class="p-3 border">PhD Chema TED Quest</td><td class="p-3 border">Summary captures thesis + ≥ 4 signposting expressions</td><td class="p-3 border">Thesis partial OR 2–3 expressions</td></tr>
+            <tr><td class="p-3 border">Cornell notes</td><td class="p-3 border">Full Cue / Notes / 50-word summary structure</td><td class="p-3 border">Notes present but missing summary</td></tr>
+            <tr><td class="p-3 border">Discipline transfer</td><td class="p-3 border">Markers identified are field-specific and varied</td><td class="p-3 border">Generic markers only, no discipline lens</td></tr>
+            <tr><td class="p-3 border">Hyland Taxonomy Practice</td><td class="p-3 border">≥ 8/10 matches correct</td><td class="p-3 border">6–7/10</td></tr>
+            <tr><td class="p-3 border">Level 4 Quiz</td><td class="p-3 border">≥ 80%</td><td class="p-3 border">60–79%</td></tr>
+          </table>
+        </details>
+
+        <!-- Checkpoint: badge screenshot -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-2xl mb-4">
+          <p class="font-bold text-sm">🚩 Checkpoint</p>
+          <p class="text-sm text-gray-700">Paste your PhD Chema badge confirmation screenshot below to unlock 400 XP and the Platinum Journal.</p>
+        </div>
+        <div class="border-2 border-dashed border-gray-300 rounded-3xl h-48 flex items-center justify-center text-gray-400 mb-2">Paste Platinum Journal badge screenshot here</div>
+        <p class="text-xs text-gray-500 mb-8 italic">Submit this worksheet back to your teacher when complete.</p>
+
+        <!-- ===== Class Notes (EXTRA INFO) ===== -->
+        <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-600">Class Notes (Extra Info)</h3>
+        <div class="mb-8 bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-2xl">
+          <p class="text-sm font-semibold mb-2">📚 Level 4 — Student Guide · Class Notes</p>
+          <p class="text-xs text-gray-600 mb-1">Spoken metadiscourse, signposting in academic talks, full Hyland &amp; Tse taxonomy with discipline-specific examples.</p>
+          <a href="https://profeanaeslava.my.canva.site/level4studentguide" target="_blank" class="text-indigo-600 hover:underline text-sm break-all">https://profeanaeslava.my.canva.site/level4studentguide</a>
+        </div>
+
+        <button onclick="completeLevel(4)" class="mt-6 w-full bg-emerald-600 text-white py-5 rounded-3xl font-bold">✅ Mark Level 4 Complete &amp; Unlock Level 5</button>
+      `;
+    }
+
+    /* ============================================================
+       LEVEL 5 — Emerging Researcher · Paragraph Forge
+       5-Move Abstract Structure · Hyland Metadiscourse in action · Writing output
+       ============================================================ */
+    else if (id === 5) {
+      html = `
+        <h2 class="text-3xl font-bold mb-2">💎 Level 5 — Emerging Researcher (500 XP)</h2>
+        <p class="text-emerald-600 font-semibold text-xl mb-2">Mission: Paragraph Forge</p>
+        <p class="text-sm text-gray-600 mb-8">Hour 5 of 6 · 60 min · Output — Writing · 5-Move Abstract Architecture · Hyland Metadiscourse in action</p>
+
+        <!-- Your name -->
+        <div class="flex items-center gap-4 mb-10 pb-6 border-b border-gray-200">
+          <label class="font-bold text-cyan-600 shrink-0">Your name:</label>
+          <input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Type your name here">
+        </div>
+
+        <!-- ===== Activity 5.1 — Instruction ===== -->
+        <div class="section-banner mb-6">Activity 5.1 — Instruction · Abstract Architecture Masterclass</div>
+
+        <!-- Intro video -->
+        <div class="mb-6">
+          <a href="https://youtu.be/H6Im7lGc7kY?si=c8h-fvWcdQb43p-p" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-red-700">
+            <i class="fab fa-youtube text-3xl"></i> ▶️ LEVEL 5 — Abstract Architecture Masterclass
+          </a>
+        </div>
+
+        <!-- Why Abstracts Matter -->
+        <div class="bg-cyan-50 border-l-4 border-cyan-500 p-5 rounded-r-2xl mb-8">
+          <p class="font-bold text-cyan-800 mb-2">🔬 Why Abstracts Matter</p>
+          <p class="text-sm text-gray-700">The abstract is the first — and often only — part of a paper that reviewers, editors, and readers encounter. A well-structured abstract signals academic expertise and determines whether your work is read or overlooked. Every Q1 journal paper you analysed at Level 2 had one. Now you will write one.</p>
+        </div>
+
+        <!-- 5-Move Reference Board -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">5-Move Structure · Reference Board</h3>
+        <div class="space-y-3 mb-8">
+          <div class="bg-green-50 border border-green-200 rounded-2xl p-4">
+            <div class="flex items-start gap-3">
+              <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-700 font-bold text-xl flex-shrink-0">M1</div>
+              <div>
+                <div class="font-bold text-green-800">Background / Situating the Research</div>
+                <div class="text-sm text-gray-600 mt-1">Introduce the topic and establish its importance. Set the scene for the reader.</div>
+                <div class="text-xs italic text-gray-500 mt-1">Recent advances in… · Academic writing plays a crucial role…</div>
+                <div class="text-xs text-green-700 mt-2 flex gap-4 flex-wrap">
+                  <span>📝 <strong>Grammar:</strong> Complex noun phrases, present tense</span>
+                  <span>🔤 <strong>Metadiscourse:</strong> transitions, evidentials, hedges</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4">
+            <div class="flex items-start gap-3">
+              <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xl flex-shrink-0">M2</div>
+              <div>
+                <div class="font-bold text-blue-800">Purpose / Research Aim</div>
+                <div class="text-sm text-gray-600 mt-1">State the objective of the study. What did you set out to investigate?</div>
+                <div class="text-xs italic text-gray-500 mt-1">This study investigates… · The present research examines…</div>
+                <div class="text-xs text-blue-700 mt-2 flex gap-4 flex-wrap">
+                  <span>📝 <strong>Grammar:</strong> Purpose statements, self-mentions ("this study")</span>
+                  <span>🔤 <strong>Metadiscourse:</strong> frame markers, self-mentions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4">
+            <div class="flex items-start gap-3">
+              <div class="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-xl flex-shrink-0">M3</div>
+              <div>
+                <div class="font-bold text-purple-800">Methods</div>
+                <div class="text-sm text-gray-600 mt-1">Explain how the research was conducted. Design, participants, instruments, data collection.</div>
+                <div class="text-xs italic text-gray-500 mt-1">A mixed-methods design was employed… · Data were collected from…</div>
+                <div class="text-xs text-purple-700 mt-2 flex gap-4 flex-wrap">
+                  <span>📝 <strong>Grammar:</strong> Passive voice ("data were collected")</span>
+                  <span>🔤 <strong>Metadiscourse:</strong> passives, frame markers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+            <div class="flex items-start gap-3">
+              <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-xl flex-shrink-0">M4</div>
+              <div>
+                <div class="font-bold text-amber-800">Results / Findings</div>
+                <div class="text-sm text-gray-600 mt-1">Present the main findings. What did the study discover?</div>
+                <div class="text-xs italic text-gray-500 mt-1">Results indicate that… · Findings suggest that… · The data reveal…</div>
+                <div class="text-xs text-amber-700 mt-2 flex gap-4 flex-wrap">
+                  <span>📝 <strong>Grammar:</strong> Reporting verbs ("findings suggest"), hedging ("may", "appear")</span>
+                  <span>🔤 <strong>Metadiscourse:</strong> hedges, boosters, reporting verbs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4">
+            <div class="flex items-start gap-3">
+              <div class="w-14 h-14 rounded-xl bg-rose-100 flex items-center justify-center text-rose-700 font-bold text-xl flex-shrink-0">M5</div>
+              <div>
+                <div class="font-bold text-rose-800">Discussion / Conclusion / Implications</div>
+                <div class="text-sm text-gray-600 mt-1">Explain the significance and contribution of your findings. Why do they matter?</div>
+                <div class="text-xs italic text-gray-500 mt-1">These findings highlight… · The study contributes to… · Future research should…</div>
+                <div class="text-xs text-rose-700 mt-2 flex gap-4 flex-wrap">
+                  <span>📝 <strong>Grammar:</strong> Evaluative language, implication statements</span>
+                  <span>🔤 <strong>Metadiscourse:</strong> attitude markers, engagement markers, boosters</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Generator tool card -->
+        <div class="mb-12 bg-indigo-50 border border-indigo-200 rounded-3xl p-6">
+          <p class="text-xs uppercase tracking-widest text-indigo-600 font-bold mb-2">Interactive Tool · Activity 5.1</p>
+          <div class="flex items-center gap-4 flex-wrap">
+            <span class="text-4xl">🔬</span>
+            <div class="flex-1">
+              <div class="font-bold text-indigo-900">Interactive Abstract Generator — Swales Model v2.0</div>
+              <p class="text-sm text-gray-600 mt-1">Build your thesis abstract step by step, move by move. Each response must be between <strong>40 and 60 words</strong>. Only English accepted.</p>
+            </div>
+            <a href="https://personales.alumno.upv.es/aeslgra/" target="_blank" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-indigo-700">🚀 Open the Generator</a>
+          </div>
+        </div>
+
+        <!-- ===== Activity 5.2 — Mission · Paragraph Forge ===== -->
+        <div class="section-banner mb-6">Activity 5.2 — Mission · Paragraph Forge</div>
+        <p class="text-gray-700 mb-8"><strong>Solo work:</strong> use the 5-Move framework to analyse an abstract, then write your own from scratch — one move at a time. Edit and submit this worksheet on completion.</p>
+
+        <!-- Section 1 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 1: Your Academic Writing Practice with PhD Chema</h3>
+
+        <div class="mb-4">
+          <a href="https://chatgpt.com/g/g-6a073b81b0e08191942bd770676aab26-phd-chema" target="_blank" class="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-emerald-700">🤖 Open PhD Chema GPT</a>
+        </div>
+
+        <!-- Discipline live-substitution -->
+        <div class="flex items-center gap-3 mb-4 bg-cyan-50 border border-cyan-200 rounded-2xl p-4">
+          <label class="font-medium text-cyan-700 text-sm shrink-0">My discipline is:</label>
+          <input type="text" id="l5-discipline" oninput="document.querySelectorAll('.l5-disc-out').forEach(el => el.textContent = this.value || '[your discipline]')" class="flex-1 border border-cyan-300 rounded-xl px-3 py-2 text-sm" placeholder="e.g. applied linguistics, public health, mechanical engineering…">
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2"><strong>Select / paste this prompt</strong> (your discipline auto-fills):</p>
+        <div class="bg-gray-100 p-5 rounded-2xl font-mono text-sm mb-4">
+          "I am at Level 5: Paragraph Forge. My discipline is <span class="l5-disc-out font-bold text-indigo-700">[your discipline]</span>. Give me a real published abstract from my field (or a model one). Then ask me to: (1) label the 5 rhetorical moves (M1–M5); (2) identify one Hyland metadiscourse marker per move and classify it; (3) write my own 150-word abstract following the same structure. Provide corrective feedback and unlock the Emerging Researcher badge when I complete all three tasks accurately."
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Record PhD Chema's abstract, your move analysis, and feedback below:</p>
+        <div class="green-box mb-10">
+          <textarea class="w-full h-52 bg-transparent border-0 outline-none text-sm" placeholder="Paste PhD Chema's abstract + your move labels + feedback here…"></textarea>
+        </div>
+
+        <!-- Section 2 -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 2: Analyse a Published Abstract — Label the 5 Moves</h3>
+        <p class="text-sm text-gray-700 mb-4">Read the abstract below. For each sentence (or sentence-group), select its rhetorical move and write one metadiscourse marker you spot.</p>
+
+        <div class="mb-10 border border-gray-200 rounded-2xl overflow-hidden">
+          <div class="bg-gray-50 px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wide border-b">Sample Abstract — GenAI &amp; Academic Writing (Annotate the Moves)</div>
+          <div class="p-5 space-y-4">
+            <div class="grid grid-cols-12 gap-3 items-start text-sm">
+              <div class="col-span-7 italic text-gray-700 leading-relaxed border-l-4 border-gray-300 pl-3">"The increasing use of generative artificial intelligence (GenAI) in higher education has created new opportunities and challenges for academic writing instruction."</div>
+              <div class="col-span-2"><select class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs"><option value="">Move?</option><option>M1 Background</option><option>M2 Purpose</option><option>M3 Methods</option><option>M4 Results</option><option>M5 Implications</option></select></div>
+              <div class="col-span-3"><input type="text" class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs" placeholder="Marker spotted…"></div>
+            </div>
+            <div class="grid grid-cols-12 gap-3 items-start text-sm">
+              <div class="col-span-7 italic text-gray-700 leading-relaxed border-l-4 border-gray-300 pl-3">"This study investigates students' perceptions of AI-generated feedback and its influence on academic writing development."</div>
+              <div class="col-span-2"><select class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs"><option value="">Move?</option><option>M1 Background</option><option>M2 Purpose</option><option>M3 Methods</option><option>M4 Results</option><option>M5 Implications</option></select></div>
+              <div class="col-span-3"><input type="text" class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs" placeholder="Marker spotted…"></div>
+            </div>
+            <div class="grid grid-cols-12 gap-3 items-start text-sm">
+              <div class="col-span-7 italic text-gray-700 leading-relaxed border-l-4 border-gray-300 pl-3">"A mixed-methods approach was employed. Data were collected from 120 undergraduate students through questionnaires and semi-structured interviews."</div>
+              <div class="col-span-2"><select class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs"><option value="">Move?</option><option>M1 Background</option><option>M2 Purpose</option><option>M3 Methods</option><option>M4 Results</option><option>M5 Implications</option></select></div>
+              <div class="col-span-3"><input type="text" class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs" placeholder="Marker spotted…"></div>
+            </div>
+            <div class="grid grid-cols-12 gap-3 items-start text-sm">
+              <div class="col-span-7 italic text-gray-700 leading-relaxed border-l-4 border-gray-300 pl-3">"The findings suggest that AI-generated feedback supports revision practices and increases learner autonomy. However, concerns regarding accuracy and overreliance were also reported."</div>
+              <div class="col-span-2"><select class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs"><option value="">Move?</option><option>M1 Background</option><option>M2 Purpose</option><option>M3 Methods</option><option>M4 Results</option><option>M5 Implications</option></select></div>
+              <div class="col-span-3"><input type="text" class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs" placeholder="Marker spotted…"></div>
+            </div>
+            <div class="grid grid-cols-12 gap-3 items-start text-sm">
+              <div class="col-span-7 italic text-gray-700 leading-relaxed border-l-4 border-gray-300 pl-3">"These findings highlight the importance of integrating AI literacy into academic writing curricula and suggest that AI should be used as a complement to, rather than a replacement for, human feedback."</div>
+              <div class="col-span-2"><select class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs"><option value="">Move?</option><option>M1 Background</option><option>M2 Purpose</option><option>M3 Methods</option><option>M4 Results</option><option>M5 Implications</option></select></div>
+              <div class="col-span-3"><input type="text" class="w-full border border-gray-300 rounded-xl px-2 py-2 text-xs" placeholder="Marker spotted…"></div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-2 border-t">
+            <p class="text-xs text-gray-500 italic">Self-check: each sentence (or group) maps to exactly one move — M1, M2, M3, M4, M5.</p>
+          </div>
+        </div>
+
+        <!-- Section 3 — Forge Your Abstract -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 3: Forge Your Own Abstract — Move by Move</h3>
+        <p class="text-sm text-gray-700 mb-2">Write a <strong>~150-word academic abstract</strong> in your discipline, one move at a time (2–3 sentences per move). Use the Interactive Generator above to draft, then paste your best version here.</p>
+        <p class="text-xs text-gray-500 mb-6">💡 Tip: aim for 40–60 words per M1–M3; 1–2 sentences for M4 and M5.</p>
+
+        <div class="space-y-4 mb-6">
+          <div class="border border-green-200 rounded-2xl overflow-hidden">
+            <div class="bg-green-50 px-4 py-2 flex items-center gap-2 border-b border-green-200">
+              <span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">M1</span>
+              <span class="font-semibold text-green-800 text-sm">Background — What is the topic and why does it matter?</span>
+            </div>
+            <div class="p-3"><textarea class="w-full h-28 border-0 outline-none text-sm resize-none" placeholder="The increasing interest in… / Recent research has shown… / In the field of [your discipline], scholars have argued…"></textarea></div>
+          </div>
+          <div class="border border-blue-200 rounded-2xl overflow-hidden">
+            <div class="bg-blue-50 px-4 py-2 flex items-center gap-2 border-b border-blue-200">
+              <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">M2</span>
+              <span class="font-semibold text-blue-800 text-sm">Purpose — What did your research aim to find out?</span>
+            </div>
+            <div class="p-3"><textarea class="w-full h-24 border-0 outline-none text-sm resize-none" placeholder="This study investigates… / The present research aims to examine… / The purpose of this study is to…"></textarea></div>
+          </div>
+          <div class="border border-purple-200 rounded-2xl overflow-hidden">
+            <div class="bg-purple-50 px-4 py-2 flex items-center gap-2 border-b border-purple-200">
+              <span class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">M3</span>
+              <span class="font-semibold text-purple-800 text-sm">Methods — How was the study conducted?</span>
+            </div>
+            <div class="p-3"><textarea class="w-full h-24 border-0 outline-none text-sm resize-none" placeholder="A [qualitative / quantitative / mixed-methods] design was employed… / Data were collected from … participants through…"></textarea></div>
+          </div>
+          <div class="border border-amber-200 rounded-2xl overflow-hidden">
+            <div class="bg-amber-50 px-4 py-2 flex items-center gap-2 border-b border-amber-200">
+              <span class="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">M4</span>
+              <span class="font-semibold text-amber-800 text-sm">Results — What did you discover?</span>
+            </div>
+            <div class="p-3"><textarea class="w-full h-24 border-0 outline-none text-sm resize-none" placeholder="The findings suggest that… / Results indicate that… / The data reveal…"></textarea></div>
+          </div>
+          <div class="border border-rose-200 rounded-2xl overflow-hidden">
+            <div class="bg-rose-50 px-4 py-2 flex items-center gap-2 border-b border-rose-200">
+              <span class="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">M5</span>
+              <span class="font-semibold text-rose-800 text-sm">Implications — Why do the findings matter?</span>
+            </div>
+            <div class="p-3"><textarea class="w-full h-24 border-0 outline-none text-sm resize-none" placeholder="These findings highlight… / The study contributes to… / This research has implications for…"></textarea></div>
+          </div>
+        </div>
+
+        <!-- Metadiscourse self-check -->
+        <div class="bg-gray-50 rounded-2xl p-5 mb-12">
+          <p class="font-semibold text-gray-800 mb-3 text-sm">✅ Metadiscourse Self-Check — confirm at least one marker per move before submitting:</p>
+          <div class="grid md:grid-cols-5 gap-3 text-xs">
+            <div class="bg-green-50 rounded-xl p-3"><div class="font-bold text-green-700 mb-2">M1 must have:</div><ul class="space-y-1 text-gray-600"><li>☐ A transition (e.g. "however")</li><li>☐ An evidential (citation / reference)</li><li>☐ A hedge (e.g. "may suggest")</li></ul></div>
+            <div class="bg-blue-50 rounded-xl p-3"><div class="font-bold text-blue-700 mb-2">M2 must have:</div><ul class="space-y-1 text-gray-600"><li>☐ A frame marker ("this study")</li><li>☐ A self-mention ("the present research")</li></ul></div>
+            <div class="bg-purple-50 rounded-xl p-3"><div class="font-bold text-purple-700 mb-2">M3 must have:</div><ul class="space-y-1 text-gray-600"><li>☐ Passive voice construction</li><li>☐ A frame marker for sequence</li></ul></div>
+            <div class="bg-amber-50 rounded-xl p-3"><div class="font-bold text-amber-700 mb-2">M4 must have:</div><ul class="space-y-1 text-gray-600"><li>☐ A reporting verb ("suggest", "indicate")</li><li>☐ A hedge or booster</li></ul></div>
+            <div class="bg-rose-50 rounded-xl p-3"><div class="font-bold text-rose-700 mb-2">M5 must have:</div><ul class="space-y-1 text-gray-600"><li>☐ An attitude marker</li><li>☐ An engagement marker or booster</li></ul></div>
+          </div>
+        </div>
+
+        <!-- Section 4 — Padlet -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 4: Peer Gallery — Share on Padlet</h3>
+        <p class="text-sm text-gray-700 mb-4">Post your completed abstract on the class Padlet. Then read at least <strong>two classmates' abstracts</strong> and leave one constructive comment on each — focus on move structure and metadiscourse use.</p>
+
+        <div class="flex flex-wrap gap-3 mb-12">
+          <a href="https://padlet.com/profeanaeslava/level-5-academic-writing-bkaowe8ue3bf9345" target="_blank" class="inline-flex items-center gap-2 bg-pink-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-pink-700">📌 Open Class Padlet — Level 5 Abstract Gallery</a>
+        </div>
+
+        <!-- ===== Activity 5.3 — Check-Point ===== -->
+        <div class="section-banner mb-6">Activity 5.3 — Check-Point · Abstract Architecture Quiz</div>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 5: Mission Proof</h3>
+        <p class="text-sm text-gray-700 mb-4">⭐ PhD Chema unlocks the <strong>Emerging Researcher</strong> badge when you: (1) correctly label all 5 moves, (2) identify ≥ 1 Hyland marker per move, AND (3) submit a ~150-word abstract with all 5 moves present. Then take the quiz to bank your 500 XP.</p>
+
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="https://personales.alumno.upv.es/aeslgra/" target="_blank" class="px-6 py-3 bg-cyan-600 text-white rounded-2xl font-semibold hover:bg-cyan-700">🔬 Return to the Abstract Generator</a>
+        </div>
+
+        <!-- Assessment rubric -->
+        <details class="mb-8 bg-gray-50 rounded-2xl p-4">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📊 How you'll be assessed</summary>
+          <table class="w-full text-sm mt-4">
+            <tr class="bg-gray-100"><th class="p-3 text-left">Criterion</th><th class="p-3 text-left">Meets (full XP)</th><th class="p-3 text-left">Approaches (50% XP)</th></tr>
+            <tr><td class="p-3 border">5-Move labelling (Section 2)</td><td class="p-3 border">All 5 moves correctly identified + 1 metadiscourse marker each</td><td class="p-3 border">3–4 moves correct; partial marker identification</td></tr>
+            <tr><td class="p-3 border">Abstract writing M1–M5 (Section 3)</td><td class="p-3 border">All 5 moves present, ~150 words, grammatically accurate</td><td class="p-3 border">3–4 moves present or significant grammar issues</td></tr>
+            <tr><td class="p-3 border">Metadiscourse self-check</td><td class="p-3 border">≥ 1 correct marker per move (full checklist)</td><td class="p-3 border">≥ 3 moves with a correct marker</td></tr>
+            <tr><td class="p-3 border">Padlet peer comments</td><td class="p-3 border">2 substantive comments linking to 5-Move structure</td><td class="p-3 border">1 comment or vague feedback</td></tr>
+            <tr><td class="p-3 border">Level 5 Quiz</td><td class="p-3 border">≥ 80%</td><td class="p-3 border">60–79%</td></tr>
+          </table>
+        </details>
+
+        <!-- Checkpoint: badge screenshot -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-2xl mb-4">
+          <p class="font-bold text-sm">🚩 Checkpoint</p>
+          <p class="text-sm text-gray-700">Paste your PhD Chema badge confirmation screenshot below to unlock 500 XP and the Sapphire Globe.</p>
+        </div>
+        <div class="border-2 border-dashed border-gray-300 rounded-3xl h-48 flex items-center justify-center text-gray-400 mb-2">Paste Sapphire Globe badge screenshot here</div>
+        <p class="text-xs text-gray-500 mb-8 italic">Submit this worksheet back to your teacher when complete.</p>
+
+        <!-- ===== Class Notes (EXTRA INFO) ===== -->
+        <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-600">Class Notes (Extra Info)</h3>
+        <div class="mb-8 bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-2xl">
+          <p class="text-sm font-semibold mb-2">📚 Level 5 — Emerging Researcher · Student Guide</p>
+          <p class="text-xs text-gray-600 mb-1">Full 5-Move framework with Swales &amp; Hyland integration, grammar features by move, sample annotated abstracts, and the simple abstract formula.</p>
+          <a href="https://profeanaeslava.my.canva.site/level5studentguide" target="_blank" class="text-indigo-600 hover:underline text-sm break-all">https://profeanaeslava.my.canva.site/level5studentguide</a>
+        </div>
+
+        <button onclick="completeLevel(5)" class="mt-6 w-full bg-emerald-600 text-white py-5 rounded-3xl font-bold">✅ Mark Level 5 Complete &amp; Unlock Level 6 (Boss)</button>
+      `;
+    }
+
+    /* ============================================================
+       LEVEL 6 — Academic Challenger · BOSS BATTLE
+       Q1 Master Scholar — Voice of the Scholar
+       Conference Pitch · Spoken Academic Communication · 1,000 XP
+       ============================================================ */
+    else if (id === 6) {
+      html = `
+        <!-- BOSS BATTLE hero banner -->
+        <div style="background:linear-gradient(135deg,#1e1b4b,#312e81,#4338ca);border-radius:1.5rem;padding:2rem 2.5rem;margin-bottom:2rem;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;opacity:0.08;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%223%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');pointer-events:none;"></div>
+          <div style="position:relative;z-index:1;">
+            <div style="font-size:0.7rem;letter-spacing:0.25em;color:#a5b4fc;text-transform:uppercase;font-weight:700;margin-bottom:0.5rem;">⚔️ BOSS BATTLE · FINAL LEVEL</div>
+            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,6vw,3.5rem);letter-spacing:0.04em;color:#ffffff;line-height:1;margin-bottom:0.5rem;">👑 ACADEMIC CHALLENGER</h2>
+            <div style="font-size:1.2rem;color:#c7d2fe;font-weight:600;margin-bottom:0.75rem;">Q1 Master Scholar — Voice of the Scholar · 1,000 XP</div>
+            <p style="font-size:0.9rem;color:#a5b4fc;max-width:52rem;">Transform your polished abstract into a professional 2-minute spoken presentation. This is the final stage: giving your research a voice.</p>
+          </div>
+        </div>
+
+        <p class="text-emerald-600 font-semibold text-xl mb-2">Mission: Conference Pitch</p>
+        <p class="text-sm text-gray-600 mb-8">Hour 6 of 6 · 60 min · Output — Speaking · Oral academic communication · Vocaroo + optional Synthesia</p>
+
+        <!-- Your name -->
+        <div class="flex items-center gap-4 mb-10 pb-6 border-b border-gray-200">
+          <label class="font-bold text-indigo-600 shrink-0">Your name:</label>
+          <input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Type your name here">
+        </div>
+
+        <!-- ===== Activity 6.1 — Instruction ===== -->
+        <div class="section-banner mb-6">Activity 6.1 — Instruction · Conference Pitch Masterclass</div>
+
+        <!-- Intro video -->
+        <div class="mb-6">
+          <a href="https://youtu.be/kFMZrEABdW4" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-red-700">
+            <i class="fab fa-youtube text-3xl"></i> ▶️ LEVEL 6 — From Abstract to Oral Presentation
+          </a>
+        </div>
+
+        <!-- Why spoken communication matters -->
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-5 rounded-r-2xl mb-8">
+          <p class="font-bold text-indigo-800 mb-2">🎤 Why Spoken Academic Communication Matters</p>
+          <p class="text-sm text-gray-700">Conference presentations, thesis defences, research seminars, and video abstracts require scholars to transform complex written knowledge into clear and engaging spoken discourse. The ability to present your research orally is as essential as writing it. This level bridges that gap.</p>
+        </div>
+
+        <!-- Spoken Signposting Reference Board -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Spoken Signposting · Reference Board</h3>
+        <p class="text-sm text-gray-600 mb-4">These organizational devices function like Hyland's metadiscourse markers in writing — they guide your audience through complex information and reduce cognitive load.</p>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-10">
+          <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4">
+            <div class="font-bold text-indigo-800 mb-3 flex items-center gap-2">🚀 Opening (M1 + M2)</div>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Good morning / afternoon, everyone."</li>
+              <li>• "Today, I would like to present…"</li>
+              <li>• "My presentation is about…"</li>
+              <li>• "The aim of this study was to…"</li>
+              <li>• "I will briefly outline…"</li>
+            </ul>
+          </div>
+          <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4">
+            <div class="font-bold text-purple-800 mb-3 flex items-center gap-2">🔬 Methods (M3)</div>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "To investigate this, we / I…"</li>
+              <li>• "The study employed a… design."</li>
+              <li>• "Data were collected from…"</li>
+              <li>• "A sample of… participants was used."</li>
+              <li>• "Moving on to the methodology…"</li>
+            </ul>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+            <div class="font-bold text-amber-800 mb-3 flex items-center gap-2">📊 Findings (M4)</div>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Turning to the results…"</li>
+              <li>• "The findings indicate / suggest that…"</li>
+              <li>• "What we found was…"</li>
+              <li>• "Interestingly, the data reveal…"</li>
+              <li>• "This result is significant because…"</li>
+            </ul>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+            <div class="font-bold text-emerald-800 mb-3 flex items-center gap-2">🏁 Conclusion (M5)</div>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "In conclusion / To sum up…"</li>
+              <li>• "These findings highlight…"</li>
+              <li>• "The study contributes to…"</li>
+              <li>• "Future research should…"</li>
+              <li>• "I would be happy to take questions."</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spoken vs Written comparison -->
+        <details class="mb-12 bg-gray-50 rounded-2xl p-4">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📝 Spoken vs Written Academic Language — key differences</summary>
+          <table class="w-full text-sm mt-4">
+            <tr class="bg-gray-100"><th class="p-3 text-left">Feature</th><th class="p-3 text-left">Written (Levels 1–5)</th><th class="p-3 text-left">Spoken (Level 6)</th></tr>
+            <tr><td class="p-3 border">Register</td><td class="p-3 border">Formal, impersonal</td><td class="p-3 border">Formal but more direct ("we found")</td></tr>
+            <tr><td class="p-3 border">Sentences</td><td class="p-3 border">Complex, long noun phrases</td><td class="p-3 border">Shorter, clearer, active voice preferred</td></tr>
+            <tr><td class="p-3 border">Signposting</td><td class="p-3 border">Transitions, frame markers in text</td><td class="p-3 border">Explicit verbal cues to guide listeners</td></tr>
+            <tr><td class="p-3 border">Hedging</td><td class="p-3 border">"may suggest", "appears to indicate"</td><td class="p-3 border">"what we found was…", "this suggests…"</td></tr>
+            <tr><td class="p-3 border">Engagement</td><td class="p-3 border">Engagement markers in text</td><td class="p-3 border">Eye contact, pacing, intonation, pauses</td></tr>
+          </table>
+        </details>
+
+        <!-- ===== Activity 6.2 — Mission · BOSS BATTLE ===== -->
+        <div class="section-banner mb-6" style="background:linear-gradient(90deg,#1e1b4b,#4338ca);">⚔️ Activity 6.2 — BOSS BATTLE · Conference Pitch</div>
+        <p class="text-gray-700 mb-8"><strong>Solo work:</strong> adapt your Level 5 abstract into an oral script, record it on Vocaroo, and optionally create an AI video with Synthesia. Edit and submit this worksheet on completion.</p>
+
+        <!-- Section 1: PhD Chema script -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 1: Adapt Your Abstract — PhD Chema Script Workshop</h3>
+
+        <div class="mb-4">
+          <a href="https://chatgpt.com/g/g-6a073b81b0e08191942bd770676aab26-phd-chema" target="_blank" class="inline-flex items-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-3xl font-medium hover:bg-emerald-700">🤖 Open PhD Chema GPT</a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4 bg-indigo-50 border border-indigo-200 rounded-2xl p-4">
+          <label class="font-medium text-indigo-700 text-sm shrink-0">My discipline is:</label>
+          <input type="text" id="l6-discipline" oninput="document.querySelectorAll('.l6-disc-out').forEach(el => el.textContent = this.value || '[your discipline]')" class="flex-1 border border-indigo-300 rounded-xl px-3 py-2 text-sm" placeholder="e.g. applied linguistics, public health, mechanical engineering…">
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2"><strong>Select / paste this prompt:</strong></p>
+        <div class="bg-gray-100 p-5 rounded-2xl font-mono text-sm mb-4">
+          "I am at Level 6: Conference Pitch. My discipline is <span class="l6-disc-out font-bold text-indigo-700">[your discipline]</span>. Take my abstract from Level 5 and help me transform it into a 2-minute spoken script (approx. 250–300 words) using spoken signposting expressions (Opening, Methods, Findings, Conclusion). Make it sound natural and academic — not like it is being read. Then give me corrective feedback on clarity, signposting, and confidence markers. Unlock the Q1 Master Scholar badge when the script is ready."
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Paste your Level 5 abstract below (PhD Chema will transform it into an oral script):</p>
+        <div class="green-box mb-4">
+          <textarea class="w-full h-36 bg-transparent border-0 outline-none text-sm" placeholder="Paste your Level 5 abstract here…"></textarea>
+        </div>
+        <p class="text-sm text-gray-600 mb-3">Your oral script (PhD Chema's output — edit until you're happy):</p>
+        <div class="green-box mb-10">
+          <textarea class="w-full h-52 bg-transparent border-0 outline-none text-sm" placeholder="Paste your final 2-minute oral script here…"></textarea>
+        </div>
+
+        <!-- Section 2: Signposting checklist -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 2: Spoken Signposting — Self-Check</h3>
+        <p class="text-sm text-gray-700 mb-4">Identify 5 signposting expressions you will use in your presentation. Write each expression and its function.</p>
+
+        <div class="space-y-3 mb-12">
+          <div class="flex items-center gap-3"><span class="font-medium w-10 text-indigo-600 shrink-0">1.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Expression… e.g. 'Turning to the results…'"><input type="text" class="w-48 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Function…"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-10 text-indigo-600 shrink-0">2.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Expression…"><input type="text" class="w-48 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Function…"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-10 text-indigo-600 shrink-0">3.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Expression…"><input type="text" class="w-48 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Function…"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-10 text-indigo-600 shrink-0">4.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Expression…"><input type="text" class="w-48 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Function…"></div>
+          <div class="flex items-center gap-3"><span class="font-medium w-10 text-indigo-600 shrink-0">5.</span><input type="text" class="flex-1 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Expression…"><input type="text" class="w-48 border border-gray-300 rounded-2xl px-4 py-3 text-sm" placeholder="Function…"></div>
+        </div>
+
+        <!-- Section 3: Vocaroo recording -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 3: 🎙️ Record Your Presentation — Vocaroo</h3>
+        <p class="text-sm text-gray-700 mb-4">Record your 2-minute conference pitch on Vocaroo. Aim for <strong>at least 2 rehearsal takes</strong> before your final recording. Paste the shareable link below.</p>
+
+        <div class="bg-gray-50 rounded-2xl p-4 mb-4">
+          <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-2">Pre-recording checklist:</p>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>☐ Script reviewed — all 5 signposting expressions included</li>
+            <li>☐ Timed rehearsal ≥ 2 takes (aim for 1m 45s – 2m 15s)</li>
+            <li>☐ Pace is measured — not too fast, not too slow</li>
+            <li>☐ Quiet environment, clear audio</li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a href="https://vocaroo.com" target="_blank" class="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-violet-700">🎙️ Open Vocaroo — Record Now</a>
+        </div>
+
+        <p class="text-sm text-gray-700 mb-2"><strong>Paste your Vocaroo link here:</strong></p>
+        <input type="text" class="w-full border border-gray-300 rounded-2xl px-4 py-3 text-sm mb-10" placeholder="https://vocaroo.com/…">
+
+        <!-- Section 4: Optional Synthesia -->
+        <h3 class="text-xl font-semibold mb-2 text-indigo-600">Section 4: 🤖 Optional — AI Video Abstract (Synthesia)</h3>
+        <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 mb-4">
+          <p class="text-xs uppercase tracking-widest text-purple-700 font-bold mb-1">Optional · Bonus Activity</p>
+          <p class="text-sm text-gray-700">Use your oral script in Synthesia to create a professional AI presenter video — a modern form of digital scholarship. This is optional but earns you the <strong>Digital Scholar bonus badge</strong>.</p>
+          <p class="text-xs text-gray-500 mt-2">⚠️ Remember: AI tools support, not replace, your authentic academic voice. Your Vocaroo recording is the primary deliverable.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mb-4">
+          <a href="https://www.synthesia.io" target="_blank" class="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-2xl font-medium hover:bg-purple-700">🎬 Open Synthesia</a>
+        </div>
+        <p class="text-sm text-gray-700 mb-2">Paste your Synthesia video link here (optional):</p>
+        <input type="text" class="w-full border border-gray-300 rounded-2xl px-4 py-3 text-sm mb-10" placeholder="https://share.synthesia.io/… (optional)">
+
+        <!-- Section 5: Flip peer listening -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 5: 🎧 Peer Listening — Flip</h3>
+        <p class="text-sm text-gray-700 mb-4">Post your Vocaroo link on Flip. Listen to at least <strong>two classmates' presentations</strong> and leave a short video or text comment for each — focus on signposting clarity and delivery confidence.</p>
+
+        <div class="flex flex-wrap gap-3 mb-4">
+          <a href="https://flip.com" target="_blank" class="inline-flex items-center gap-2 bg-orange-500 text-white px-6 py-3 rounded-2xl font-medium hover:bg-orange-600">🎬 Open Flip — Class Wall</a>
+        </div>
+        <p class="text-sm text-gray-700 mb-2">Notes from peer feedback you received:</p>
+        <div class="green-box mb-12">
+          <textarea class="w-full h-32 bg-transparent border-0 outline-none text-sm" placeholder="Peer comment 1:&#10;Peer comment 2:&#10;What I'll improve:"></textarea>
+        </div>
+
+        <!-- ===== Activity 6.3 — Check-Point ===== -->
+        <div class="section-banner mb-6">Activity 6.3 — Check-Point · Diamond Crown Assessment</div>
+
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 6: Mission Proof — 3-Dimension Assessment</h3>
+        <p class="text-sm text-gray-700 mb-6">⭐ Your teacher will assess your Vocaroo recording against these three dimensions. Self-assess first.</p>
+
+        <!-- Self-assessment grid -->
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+          <div class="border-2 border-indigo-200 rounded-2xl p-4">
+            <div class="text-center mb-3">
+              <div class="text-3xl mb-1">💬</div>
+              <div class="font-bold text-indigo-800">Message Clarity</div>
+              <div class="text-xs text-gray-500 mt-1">Content accessible &amp; professionally appropriate</div>
+            </div>
+            <select class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm">
+              <option value="">Self-assess…</option>
+              <option>Excellent — fully clear, no jargon issues</option>
+              <option>Good — mostly clear with minor issues</option>
+              <option>Developing — some unclear passages</option>
+              <option>Needs work — difficult to follow</option>
+            </select>
+          </div>
+          <div class="border-2 border-purple-200 rounded-2xl p-4">
+            <div class="text-center mb-3">
+              <div class="text-3xl mb-1">🗺️</div>
+              <div class="font-bold text-purple-800">Audience Engagement</div>
+              <div class="text-xs text-gray-500 mt-1">Signposting reduces cognitive load</div>
+            </div>
+            <select class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm">
+              <option value="">Self-assess…</option>
+              <option>Excellent — ≥ 5 signposts, well-placed</option>
+              <option>Good — 3–4 signposts used correctly</option>
+              <option>Developing — 1–2 signposts, generic</option>
+              <option>Needs work — no clear signposting</option>
+            </select>
+          </div>
+          <div class="border-2 border-emerald-200 rounded-2xl p-4">
+            <div class="text-center mb-3">
+              <div class="text-3xl mb-1">🎤</div>
+              <div class="font-bold text-emerald-800">Delivery Confidence</div>
+              <div class="text-xs text-gray-500 mt-1">Strong academic voice &amp; presence</div>
+            </div>
+            <select class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm">
+              <option value="">Self-assess…</option>
+              <option>Excellent — measured pace, clear diction</option>
+              <option>Good — mostly confident, minor hesitations</option>
+              <option>Developing — audible nerves, some rushing</option>
+              <option>Needs work — very fast / hesitant throughout</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Assessment rubric -->
+        <details class="mb-8 bg-gray-50 rounded-2xl p-4">
+          <summary class="cursor-pointer font-semibold text-indigo-700">📊 Full Assessment Rubric</summary>
+          <table class="w-full text-sm mt-4">
+            <tr class="bg-gray-100"><th class="p-3 text-left">Dimension</th><th class="p-3 text-left">Meets (full XP)</th><th class="p-3 text-left">Approaches (50% XP)</th></tr>
+            <tr><td class="p-3 border font-semibold">Message Clarity</td><td class="p-3 border">Research content accessible and professionally appropriate; all 5 moves identifiable</td><td class="p-3 border">Content present but some passages unclear or missing moves</td></tr>
+            <tr><td class="p-3 border font-semibold">Audience Engagement</td><td class="p-3 border">≥ 5 signposting expressions correctly used to structure presentation</td><td class="p-3 border">3–4 expressions used; some misplaced or generic</td></tr>
+            <tr><td class="p-3 border font-semibold">Delivery Confidence</td><td class="p-3 border">Measured pace, clear diction, 1:45–2:15 duration</td><td class="p-3 border">Mostly audible but notably rushed or hesitant</td></tr>
+            <tr><td class="p-3 border font-semibold">Script adaptation</td><td class="p-3 border">Script reads naturally when spoken, not like written text</td><td class="p-3 border">Mostly formal written register maintained in speech</td></tr>
+            <tr><td class="p-3 border font-semibold">Peer listening (Flip)</td><td class="p-3 border">2 substantive comments on classmates' signposting &amp; delivery</td><td class="p-3 border">1 comment or vague feedback</td></tr>
+          </table>
+        </details>
+
+        <!-- Final metacognitive reflection -->
+        <h3 class="text-xl font-semibold mb-4 text-indigo-600">Section 7: 🌟 Final Reflection — The Journey Complete</h3>
+        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-2xl p-5 mb-4">
+          <p class="text-sm font-semibold text-indigo-800 mb-3">Reflect on your Academic Writing Journey across all 6 levels. Answer these three questions:</p>
+          <ol class="text-sm text-gray-700 space-y-2 list-decimal ml-5">
+            <li>How has your <strong>confidence</strong> in academic writing and speaking changed from Level 1 to Level 6?</li>
+            <li>Which <strong>skill or concept</strong> (AWL, Swales' moves, Hyland's metadiscourse, abstract writing, oral presentation) has had the greatest impact on you — and why?</li>
+            <li>How will you use these skills in your <strong>future academic or professional life</strong>?</li>
+          </ol>
+        </div>
+        <div class="green-box mb-10">
+          <textarea class="w-full h-48 bg-transparent border-0 outline-none text-sm" placeholder="1. My confidence has changed because…&#10;&#10;2. The concept that impacted me most was…&#10;&#10;3. In my future academic / professional life, I will…"></textarea>
+        </div>
+
+        <!-- Checkpoint badge -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-2xl mb-4">
+          <p class="font-bold text-sm">🚩 Final Checkpoint</p>
+          <p class="text-sm text-gray-700">Paste your PhD Chema Q1 Master Scholar badge screenshot below to unlock 1,000 XP and the Diamond Crown of Publication.</p>
+        </div>
+        <div class="border-2 border-dashed border-gray-300 rounded-3xl h-48 flex items-center justify-center text-gray-400 mb-2">Paste Diamond Crown of Publication badge screenshot here</div>
+        <p class="text-xs text-gray-500 mb-8 italic">Submit this worksheet back to your teacher when complete.</p>
+
+        <!-- Class Notes -->
+        <h3 class="text-xl font-semibold mb-4 mt-8 text-indigo-600">Class Notes (Extra Info)</h3>
+        <div class="mb-8 bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-2xl">
+          <p class="text-sm font-semibold mb-2">📚 Level 6 — Q1 Master Scholar · Student Guide</p>
+          <p class="text-xs text-gray-600 mb-1">Full guide: oral academic communication, spoken signposting strategies, Vocaroo recording tips, Synthesia AI video guide, and assessment criteria.</p>
+          <a href="https://profeanaeslava.my.canva.site/level6studentguide" target="_blank" class="text-indigo-600 hover:underline text-sm break-all">https://profeanaeslava.my.canva.site/level6studentguide</a>
+        </div>
+
+        <!-- Journey Complete celebration -->
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a,#fbbf24);border-radius:1.5rem;padding:2rem;text-align:center;margin-bottom:2rem;border:2px solid #f59e0b;">
+          <div style="font-size:3rem;margin-bottom:0.5rem;">🏆👑💎</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:#92400e;">ACADEMIC WRITING JOURNEY COMPLETE</div>
+          <p style="color:#78350f;font-size:0.9rem;margin-top:0.5rem;">You have progressed from Curious Student to Q1 Master Scholar — 2,500 XP earned. You are now an emerging scholar with a voice.</p>
+        </div>
+
+        <button onclick="completeLevel(6)" class="mt-2 w-full text-white py-5 rounded-3xl font-bold text-lg" style="background:linear-gradient(135deg,#4338ca,#7c3aed);">🏆 Complete the Journey — Claim Your Diamond Crown of Publication</button>
+      `;
+    }
+
+    panel.innerHTML = html;
+    panel.classList.remove('hidden');
+    panel.scrollIntoView({ behavior: "smooth" });
+  }
+
+  /* Generalised: any level can be completed and unlocks the next one. */
+  function completeLevel(id) {
+    if (id < 6) {
+      completedLevels = Math.max(completedLevels, id + 1);
+      updateProgress();
+      alert(`🎉 Level ${id} completed! Level ${id + 1} is now unlocked.`);
+    } else {
+      completedLevels = 6;
+      updateProgress();
+      alert(`🏆 Journey complete! You've earned the Diamond Crown of Publication.`);
+    }
+    document.getElementById('detail-panel').classList.add('hidden');
+    renderLevels();
+  }
+
+  function toggleOverview() {
+    document.getElementById('overview-section').classList.toggle('hidden');
+  }
+
+  /* Fixed XP counter: sums actual XP for each unlocked level. */
+  function updateProgress() {
+    const percent = Math.min((completedLevels / 6) * 100, 100);
+    document.getElementById('progress-bar').style.width = percent + '%';
+    let xp = 0;
+    for (let i = 0; i < completedLevels && i < levels.length; i++) xp += levels[i].xp;
+    document.getElementById('progress-text').innerHTML = `Level ${completedLevels} of 6 • ${xp} XP`;
+  }
+
+  /**
+   * Open the Heist in the modal iframe via its GitHub Pages URL.
+   * Using iframe src (not srcdoc) preserves the parent ⇄ child relationship,
+   * so window.parent.postMessage from the Heist reaches onHeistComplete here,
+   * which is what enables the warp to Level 6. New tabs cannot do this.
+   * Only fires if Level 3 has been completed.
+   */
+  const VAULT_URL = "https://profeanaeslavaedtech.github.io/escaperoom/";
+  function openVaultModal() {
+    if (typeof completedLevels === 'undefined' || completedLevels < 4) {
+      alert('Complete Level 3 first to unlock the Abstract Heist.');
+      return;
+    }
+    const modal = document.getElementById('heist-modal');
+    const iframe = document.getElementById('heist-frame');
+    if (iframe.src !== VAULT_URL) iframe.src = VAULT_URL;
+    modal.classList.add('open');
+    document.body.classList.add('heist-open');
+  }
+
+  /**
+   * Manual unlock fallback — for learners who played the Heist in another window/device
+   * and need to register completion in the journey. Triggers the same handler as postMessage.
+   */
+  function manualHeistUnlock() {
+    if (heistCompleted) return;
+    if (!confirm('Confirm: you completed the Abstract Heist in another window and want to unlock Levels 4, 5 and 6 now?')) return;
+    onHeistComplete(0, 'Manual unlock');
+  }
+
+  // Initialize
+  renderLevels();
+  updateProgress();
+</script>
+
+<!-- ===== Abstract Heist modal (self-contained game) ===== -->
+<div class="heist-modal" id="heist-modal" onclick="if(event.target===this)closeHeist()">
+  <button class="heist-close" type="button" onclick="closeHeist()" aria-label="Close the Heist">&#10005;</button>
+  <iframe id="heist-frame" allow="fullscreen" title="The Abstract Heist"></iframe>
+</div>
+
+<script type="text/html" id="heist-source"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Abstract Heist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -623,6 +2046,8 @@ function escapeSeq(){
     ['TOTAL XP', xp+' XP']
   ];
   document.getElementById('breakdown').innerHTML=rows.map(r=>`<div><span>${r[0]}</span><b>${typeof r[1]==='number'?r[1]+' XP':r[1]}</b></div>`).join('');
+  /* Signal the parent Journey page so completing the Heist unlocks Level 6 (warp to the Boss) */
+  try{if(window.parent&&window.parent!==window){window.parent.postMessage({type:'heist-complete',xp:xp,rank:rankFor(xp)},'*');}}catch(e){}
 }
 function sumSkim(){let n=Object.keys(v1Awarded).length*10; if(v1bonusGiven)n+=20; return n;}
 function sumScan(){return Object.keys(v2Awarded).length*15;}
@@ -660,6 +2085,39 @@ function resetGame(){
     q.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel','correct','wrong'));});
   go('intro');
 }
+</script>
+
+<script>
+function openHeist() {
+  // Only allow opening the Heist if the bonus vault is unlocked (Level 3 completed → completedLevels >= 4)
+  try {
+    if (typeof completedLevels !== 'undefined' && completedLevels < 4) {
+      alert('Complete Level 3 to unlock the Abstract Heist.');
+      return;
+    }
+  } catch (e) {
+    // fail-safe: if state is missing, prevent navigation
+    alert('Complete Level 3 to unlock the Abstract Heist.');
+    return;
+  }
+
+  const modal = document.getElementById('heist-modal');
+  const iframe = document.getElementById('heist-frame');
+  if (!iframe.srcdoc) {
+    const raw = document.getElementById('heist-source').textContent;
+    iframe.srcdoc = raw.replaceAll('<\\/script>', '</script>');
+  }
+  modal.classList.add('open');
+  document.body.classList.add('heist-open');
+}
+function closeHeist() {
+  document.getElementById('heist-modal').classList.remove('open');
+  document.body.classList.remove('heist-open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('heist-modal').classList.contains('open')) closeHeist();
+});
 </script>
 </body>
 </html>
