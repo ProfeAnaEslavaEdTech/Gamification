@@ -195,7 +195,7 @@ Crack three vaults — Skim → Scan → Infer — and assemble the master code 
 © June 2026 **Ana Eslava-Graterol** · [@profeanaeslava](https://www.instagram.com/profeanaeslava)  
 *Subject Matter Expert – Applied Linguistics to Technology and Teaching of Academic English / ESP/EAP*
 
-Developed in co-authorship with **Claude Code** — AI-Powered Web Development Engineer.
+Developed  with **Claude Code** — AI-Powered Web Development Engineer.
 
 Project aimed at promoting the **ethical and responsible Human–AI Collaboration in Education** in AI Literacy and Academic Literacy in English for Specific Purposes (ESP/EAP).
 
